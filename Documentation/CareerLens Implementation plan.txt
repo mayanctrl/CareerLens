@@ -1,0 +1,134 @@
+CareerLens AI
+Project Owner: Mayan | Target Completion: 8-10 Weeks | Deployment: Vercel | Database: Supabase | Design:
+Google Stitch | Development: Claude Opus | Version: 1.0
+
+SUMMARY
+Build a production-ready Career Intelligence Platform that helps students: Discover suitable career roles, Analyze
+placement readiness, Check company eligibility, Identify skill gaps, Generate learning roadmaps, Analyze resumes,
+Track applications, Receive AI career guidance.
+
+DEVELOPMENT APPROACH
+Follow: Design First → Database First → Core Features → AI Features → Optimization → Deployment. Rule: Never
+build UI before understanding data flow.
+
+PHASE 0 — PROJECT SETUP
+Goal: Prepare development environment. Estimated Time: 1 Day. Tasks: Create GitHub Repository, Create Supabase
+Project, Create Vercel Project, Generate API Keys, Setup Environment Variables, Configure Local Development,
+Install Dependencies. Deliverables: Working Next.js App, GitHub Connected, Supabase Connected, Vercel Connected.
+Success Criteria: App runs locally and connects to Supabase.
+
+PHASE 1 — UI/UX DESIGN
+Goal: Generate all screens and design system. Estimated Time: 2-3 Days. Tasks: Feed UI/UX Spec into Google Stitch;
+Generate: Landing Page, Dashboard, Profile, Role Matching, Company Explorer, Roadmaps, Resume Analyzer, AI
+Coach, Applications, Settings; Create Design Tokens; Create Component Library; Review Responsive Layouts.
+Deliverables: Complete Design System, All Screens Approved. Success Criteria: All major screens designed before
+coding.
+
+PHASE 2 — DATABASE IMPLEMENTATION
+Goal: Build backend foundation. Estimated Time: 2 Days. Tasks: Create Tables, Create Relationships, Create Indexes,
+Create Storage Buckets, Enable RLS, Test CRUD Operations. Tables: profiles, skills, projects, certifications, resumes,
+roles, companies, applications, roadmaps, notifications, ai_conversations, ai_messages. Deliverables: Production
+Database. Success Criteria: All tables operational and secured.
+
+PHASE 3 — AUTHENTICATION SYSTEM
+Goal: User registration and login. Estimated Time: 1 Day. Tasks: Email Signup, Email Login, Google OAuth,
+Password Reset, Protected Routes, Session Management. Deliverables: Secure Authentication. Success Criteria: User
+can register, login, logout.
+
+PHASE 4 — PROFILE MANAGEMENT
+Goal: Build user profile ecosystem. Estimated Time: 2 Days. Tasks: Create Profile Page, Profile Editing, Skills CRUD,
+Projects CRUD, Certifications CRUD, Career Goals CRUD, Profile Completion Logic. Deliverables: Complete Profile
+Module. Success Criteria: Users can fully manage profile data.
+
+PHASE 5 — DASHBOARD SYSTEM
+
+Goal: Build central dashboard. Estimated Time: 2 Days. Tasks: Welcome Section, Readiness Score Card, Quick
+Actions, Progress Widgets, Recent Activity, Charts, Dashboard API. Deliverables: Functional Dashboard. Success
+Criteria: Dashboard reflects user profile data.
+
+PHASE 6 — ROLE MATCHING ENGINE
+Goal: Career recommendation engine. Estimated Time: 2 Days. Tasks: Build Role Database, Role Scoring Algorithm,
+Match Calculation Logic, Role Cards, Role Detail Pages. Deliverables: Role Matching System. Success Criteria: Role
+recommendations generated from profile.
+
+PHASE 7 — COMPANY ELIGIBILITY ENGINE
+Goal: Eligibility analysis. Estimated Time: 2 Days. Tasks: Company Database, Eligibility Rules, CGPA Validation,
+Skill Matching, Eligibility Reports, Company Explorer UI. Deliverables: Eligibility Engine. Success Criteria: User
+sees eligible companies.
+
+PHASE 8 — SKILL GAP ANALYZER
+Goal: Identify missing skills. Estimated Time: 1 Day. Tasks: Compare User Skills, Compare Role Skills, Gap
+Calculation, Priority Ranking, Visualization. Deliverables: Gap Analysis Module. Success Criteria: Missing skills
+accurately displayed.
+
+PHASE 9 — ROADMAP GENERATOR
+Goal: Generate personalized learning plans. Estimated Time: 2 Days. Tasks: Claude Integration, Prompt Engineering,
+Roadmap Templates, Save Roadmaps, Roadmap Viewer, Progress Tracking. Deliverables: Roadmap System. Success
+Criteria: Users receive AI-generated plans.
+
+PHASE 10 — RESUME ANALYZER
+Goal: Resume evaluation. Estimated Time: 2 Days. Tasks: File Upload, PDF Parsing, Resume Extraction, Claude
+Analysis, ATS Scoring, Suggestions Engine. Deliverables: Resume Analyzer. Success Criteria: Resume receives score
+and feedback.
+
+PHASE 11 — AI CAREER COACH
+Goal: Personalized AI guidance. Estimated Time: 2 Days. Tasks: Chat Interface, Conversation Storage, Context
+Injection, Prompt Templates, Suggested Prompts. Deliverables: AI Career Coach. Success Criteria: Coach answers
+using profile context.
+
+PHASE 12 — APPLICATION TRACKER
+Goal: Placement tracking. Estimated Time: 1 Day. Tasks: Application CRUD, Status Updates, Kanban Board, Progress
+Tracking, Notifications. Deliverables: Application Tracker. Success Criteria: Users can manage placement journey.
+
+PHASE 13 — JOB DESCRIPTION ANALYZER
+Goal: Compare jobs with profile. Estimated Time: 1 Day. Tasks: JD Input, Skill Extraction, Match Algorithm, Gap
+Detection, Recommendations. Deliverables: JD Analyzer. Success Criteria: Job match percentage generated.
+
+PHASE 14 — INTERVIEW PREPARATION HUB
+Goal: Interview readiness. Estimated Time: 2 Days. Tasks: Question Bank, Company Questions, Mock Interview Flow,
+AI Evaluation, Feedback System. Deliverables: Interview Module. Success Criteria: Users receive interview practice.
+
+PHASE 15 — NOTIFICATIONS
+Goal: Improve engagement. Estimated Time: 1 Day. Tasks: Notification Table, Notification Center, Read/Unread
+Logic, Roadmap Alerts, Application Reminders. Deliverables: Notification System. Success Criteria: Users receive
+actionable alerts.
+
+PHASE 16 — TESTING
+Goal: Remove bugs and stabilize. Estimated Time: 3 Days. Testing Types: Authentication, CRUD Operations, AI
+Responses, Database Security, File Uploads, Responsiveness, Edge Cases. Deliverables: Stable Build. Success
+Criteria: No critical bugs.
+
+PHASE 17 — PERFORMANCE OPTIMIZATION
+Goal: Improve speed. Estimated Time: 2 Days. Tasks: Optimize Queries, Lazy Loading, Caching, Image Optimization,
+Code Splitting, Bundle Analysis. Deliverables: Optimized Application. Success Criteria: Dashboard loads under 3
+seconds.
+
+PHASE 18 — DEPLOYMENT
+Goal: Production release. Estimated Time: 1 Day. Tasks: Environment Variables, Vercel Deployment, Database
+Verification, Storage Verification, SSL Verification, Final QA. Deliverables: Live CareerLens Application. Success
+Criteria: Publicly accessible application.
+
+MVP CHECKLIST
+Authentication, Profile System, Dashboard, Skills Management, Projects Management, Certifications, Role Matching,
+Company Eligibility, Skill Gap Analysis, Roadmap Generator, Resume Analyzer, AI Career Coach, Application
+Tracker, JD Analyzer, Responsive Design, Deployment.
+
+POST-MVP ROADMAP
+V2: GitHub Integration, LinkedIn Integration, LeetCode Integration, Placement Prediction, Resume Builder, Portfolio
+Builder, Referral Marketplace.
+
+SUCCESS METRICS
+Technical: 99% Uptime, <3s Dashboard Load, <10s AI Response, <15s Resume Analysis. Product: Profile Completion
+Rate, Roadmap Generation Rate, Resume Upload Rate, Application Tracking Usage, AI Coach Usage.
+
+FINAL BUILD ORDER
+1. Setup, 2. UI Design, 3. Database, 4. Authentication, 5. Profile Module, 6. Dashboard, 7. Role Matching, 8. Company
+Eligibility, 9. Skill Gap Analysis, 10. Roadmap Generator, 11. Resume Analyzer, 12. AI Coach, 13. Application
+Tracker, 14. JD Analyzer, 15. Interview Hub, 16. Notifications, 17. Testing, 18. Optimization, 19. Deployment.
+
+DEFINITION OF DONE
+A student can: Create Account, Build Profile, Add Skills, Add Projects, Upload Resume, Discover Career Roles, Check
+Company Eligibility, Find Skill Gaps, Generate Roadmaps, Chat With AI Coach, Track Applications, Prepare For
+Interviews, Access Everything On Mobile, Without developer assistance.
+
+

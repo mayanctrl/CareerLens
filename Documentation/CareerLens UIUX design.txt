@@ -1,0 +1,117 @@
+CareerLens AI
+Version: 1.0
+
+SUMMARY
+Design Style: Minimalist, Modern, Professional, Student Friendly, Premium SaaS
+
+1. DESIGN PRINCIPLES
+The interface should feel: Clean, Focused, Fast, Friendly, Career Oriented. Avoid: Bright gradients everywhere,
+Excessive animations, Cluttered dashboards, Too many colors. Goal: Users should instantly understand: "Where am
+I?" "What should I do next?" "How close am I to my career goal?"
+
+2. COLOR SYSTEM
+Primary Background: #0B132B. Secondary Background: #1C2541. Card Background: #1C2541. Border Color:
+#3A506B. Primary Accent: #5BC0BE. Highlight Accent: #6FFFE9. Primary Text: #FFFFFF. Secondary Text:
+#CBD5E1. Muted Text: #94A3B8. Success: #6FFFE9. Warning: #FBBF24. Danger: #EF4444.
+
+3. TYPOGRAPHY
+Font Family: Inter. Alternative: Geist. Headings Font Weight: 700. Body Text Font Weight: 400. Buttons Font Weight:
+500.
+
+4. SPACING SYSTEM
+Base Unit: 8px. Spacing Scale: 8, 16, 24, 32, 48, 64. Never place elements too close. Use generous whitespace.
+
+5. GLOBAL LAYOUT
+Desktop Layout: Sidebar Left Width 280px. Main Content Scrollable. Top Navigation Sticky Height 72px.
+
+6. SIDEBAR DESIGN
+Background: #1C2541. Logo: CareerLens AI. Navigation Items: Dashboard, Profile, Role Matching, Companies,
+Roadmaps, Resume Analyzer, AI Coach, Applications, Settings. Hover Background: #3A506B. Active Left Accent
+Bar: #5BC0BE.
+
+7. TOP NAVIGATION
+Left: Page Title. Right: Search, Notifications, Profile Avatar. Background: Blurred Glass Effect.
+
+8. LANDING PAGE
+Hero Section Headline: See Your Career Clearly. Subheadline: AI-powered placement intelligence for students.
+Primary CTA: Get Started. Secondary CTA: Watch Demo. Sections: Features, Benefits, How It Works, Testimonials,
+Footer.
+
+9. DASHBOARD PAGE
+
+👋
+
+Dashboard Philosophy: Show only what matters. Top Welcome Section: Hello Mayan . Your Placement Readiness
+Score: 82%. Primary Cards: Readiness Score, Resume Score, Eligible Companies, Role Matches. Quick Actions:
+
+Analyze Resume, Generate Roadmap, Ask AI Coach. Charts: Skill Growth, Applications Progress, Roadmap Progress.
+Recent Activity: Latest AI Analysis, Latest Resume Review, Latest Applications.
+
+10. READINESS SCORE CARD
+Large Circular Progress. Center Number: 82%. Color: #6FFFE9. Below: Placement Ready. Skill Gap: 18%.
+
+11. PROFILE PAGE
+Tabs: Overview, Skills, Projects, Certifications, Goals. Profile Completion Bar: Top Section.
+
+12. SKILLS PAGE
+Display: Skill Chips. Example: Python, React, Node.js, TensorFlow. Skill Levels: Beginner, Intermediate, Advanced,
+Expert. Add Skill Button: Floating.
+
+13. ROLE MATCHING PAGE
+Layout: Role Cards. Card Example: AI Engineer. Match: 87%. Progress Bar: #5BC0BE. View Details Button.
+
+14. COMPANY EXPLORER
+Search Bar. Filters: Role, Package, Domain, Difficulty. Company Cards: Company Name, Eligibility %, Package,
+Apply Button.
+
+15. COMPANY DETAILS PAGE
+Sections: Overview, Eligibility, Required Skills, Hiring Process, Interview Tips. Eligibility Indicator: Green, Yellow,
+Red.
+
+16. SKILL GAP ANALYSIS
+Two Column Layout. Left: Current Skills. Right: Missing Skills. Gap Visualization: Progress Bars.
+
+17. ROADMAP PAGE
+Timeline Layout: Week 1, Week 2, Week 3, Week 4. Milestones Connected By Vertical Line. Completion Checkmarks:
+#6FFFE9.
+
+18. RESUME ANALYZER
+Upload Zone: Drag & Drop. After Upload: ATS Score Card, Keyword Analysis, Suggestions. Visual Meter: Circular
+Gauge.
+
+19. AI CAREER COACH
+ChatGPT Style Interface. Left: Previous Chats. Right: Chat Window. Suggested Prompts: Am I ready for Google?
+What should I learn next? Generate a roadmap.
+
+20. APPLICATION TRACKER
+Kanban Board: Wishlist, Applied, Interview, Selected, Rejected. Drag & Drop Cards.
+
+21. INTERVIEW PREPARATION
+
+Question Card. Answer Area. AI Feedback Panel: Communication Score, Technical Score, Confidence Score.
+
+22. NOTIFICATION CENTER
+Slide Over Panel. Grouped By: Today, This Week, Earlier.
+
+23. EMPTY STATES
+No Skills: "Add your first skill." No Resume: "Upload your resume for analysis." No Applications: "Track your first
+application." Use illustrations.
+
+24. MICRO INTERACTIONS
+Button Hover Scale: 1.02. Card Hover: Lift Effect. Sidebar Hover: Smooth Highlight. Page Transitions: 200ms.
+
+25. MOBILE DESIGN
+Bottom Navigation: Dashboard, Roadmaps, Coach, Applications, Profile. Sidebar Becomes Drawer. Cards Stack
+Vertically.
+
+26. ACCESSIBILITY
+WCAG AA. Keyboard Navigation. Screen Reader Support. High Contrast Text.
+
+27. DESIGN GOAL
+The user should feel: "I know exactly where I stand." "I know what to learn next." "I know which companies I can
+target." The product should feel like a personal AI career mentor rather than a placement portal.
+
+END OF UI/UX SPECIFICATION
+CareerLens AI UI/UX Design Specification
+
+

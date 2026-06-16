@@ -1,0 +1,134 @@
+CareerLens AI
+Version: 1.0 | Author: Mayan
+
+SUMMARY
+Defines complete user journey, navigation structure, page hierarchy, user actions, system responses, and feature
+interactions for CareerLens AI.
+
+PURPOSE
+Defines complete user journey, navigation structure, page hierarchy, user actions, system responses, and feature
+interactions for CareerLens AI.
+
+1. HIGH LEVEL USER JOURNEY
+User Lands On Website ↓ Authentication ↓ Profile Setup ↓ Skill Assessment ↓ Dashboard Generation ↓ Career
+Analysis ↓ Role Matching ↓ Company Eligibility ↓ Skill Gap Detection ↓ Roadmap Generation ↓ Resume Analysis ↓
+AI Career Coach ↓ Application Tracking ↓ Continuous Improvement Loop
+
+2. APPLICATION NAVIGATION STRUCTURE
+PUBLIC PAGES
+Landing Page About Features Pricing (Future) Contact Login Signup
+PROTECTED PAGES
+Dashboard Profile Skills Projects Certifications Resume Analyzer Role Matching Company Explorer Roadmaps AI
+Coach Applications Settings
+
+3. FIRST TIME USER FLOW
+VISIT WEBSITE
+User opens CareerLens
+Landing Page Displays:
+- Product Introduction - Features - Benefits - Testimonials (Future) - CTA Buttons
+Buttons:
+Get Started Login
+User clicks:
+Get Started
+↓ Signup Page
+
+4. SIGNUP FLOW
+Signup Methods
+Option 1: Email + Password
+Option 2: Google Authentication
+User Creates Account
+↓ Email Verification
+↓ Account Created
+
+↓ Redirect To Onboarding
+
+5. ONBOARDING FLOW
+STEP 1 Basic Information Fields: Full Name College Department Year CGPA Graduation Year Click Continue
+STEP 2 Skills Selection User Adds: Programming Languages Frameworks Tools Technologies Examples: Python Java
+React Node.js TensorFlow Click Continue
+STEP 3 Projects User Adds: Project Title Description GitHub Link Tech Stack Multiple Projects Allowed Click
+Continue
+STEP 4 Certifications Add: Certification Name Issuer Completion Date Skip Allowed Click Continue
+STEP 5 Career Goals Target Roles Examples: AI Engineer ML Engineer Data Scientist Frontend Developer Backend
+Developer Full Stack Developer Target Companies Examples: Google Microsoft Amazon Infosys Click Finish
+SYSTEM ACTION Generate: Initial Readiness Score Role Match Analysis Company Eligibility Analysis Dashboard
+Setup Redirect To Dashboard
+
+6. DASHBOARD FLOW
+Dashboard Loads System Fetches: Profile Skills Projects Certifications Roadmaps Applications Display Cards: Career
+Readiness Score Resume Score Eligible Companies Matched Roles Missing Skills Applications Count Charts Skill
+Growth Application Progress Readiness Trend Quick Actions Analyze Resume Generate Roadmap Ask AI Coach
+Explore Companies Track Application
+
+7. PROFILE FLOW
+User Opens Profile Tabs: Personal Info Skills Projects Certifications Career Goals Actions Edit Profile Add Skills Add
+Projects Delete Skills Delete Projects Update Career Goals System Recalculates Readiness Score Role Match
+Eligibility Score
+
+8. ROLE MATCHING FLOW
+User Opens Role Matching System Reads: Skills Projects Certifications CGPA AI Analysis Starts Display: Top
+Matched Roles Example: AI Engineer → 87% ML Engineer → 82% Data Scientist → 79% Backend Developer →
+74% Role Details Required Skills Missing Skills Learning Path Salary Range Industry Demand Button Generate
+Roadmap
+
+9. COMPANY ELIGIBILITY FLOW
+User Opens Company Explorer Search Companies Filter: Role Package Domain Difficulty Select Company Display
+Company Profile Eligibility Criteria Required Skills Expected Questions Hiring Process Average Package AI Analysis
+Eligible Partially Eligible Not Eligible Display Eligibility % Gap % Missing Skills Button Improve Eligibility
+
+10. SKILL GAP FLOW
+User Selects Target Role Example: AI Engineer System Compares Current Skills Required Skills Display Already
+Have Need To Learn Priority Order Categories High Priority Medium Priority Low Priority Button Generate Roadmap
+
+11. ROADMAP GENERATOR FLOW
+User Clicks Generate Roadmap Input Current Skills Target Role Target Company Timeline 30 Days 60 Days 90 Days
+180 Days AI Generates Weekly Learning Plan Projects Resources Milestones Assessments Roadmap Saved User Can
+View Update Regenerate Download
+
+12. RESUME ANALYZER FLOW
+
+User Uploads Resume Formats PDF DOCX Resume Stored Supabase Storage AI Analysis Output ATS Score Keyword
+Analysis Formatting Analysis Missing Sections Improvement Suggestions Resume Score Updated Dashboard Updated
+
+13. JOB DESCRIPTION ANALYZER FLOW
+User Pastes Job Description AI Extracts Role Skills Responsibilities Technologies Keywords Compare Against User
+Profile Output Match % Missing Skills Improvement Suggestions Button Create Learning Plan
+
+14. AI CAREER COACH FLOW
+User Opens AI Coach Chat Interface AI Context Includes Skills Projects Resume Roadmap Career Goals Example
+Questions Am I ready for Google? What should I learn next? How can I become an AI Engineer? What project should
+I build? Responses Stored AI Chat History
+
+15. PROJECT RECOMMENDATION FLOW
+User Opens Projects Hub Select Target Role Difficulty Domain AI Generates Project Ideas Tech Stack Implementation
+Plan Difficulty Level Expected Learning Outcome Save Project Add To Profile
+
+16. APPLICATION TRACKER FLOW
+User Clicks Add Application Fields Company Role Application Date Status Notes Statuses Wishlist Applied OA
+Scheduled Interview Scheduled Selected Rejected Dashboard Updates Automatically
+
+17. INTERVIEW PREPARATION FLOW
+User Selects Company Role Generate Questions Technical HR Behavioral Mock Interview Mode User Answers AI
+Evaluates Output Communication Score Technical Score Confidence Score Suggestions
+
+18. NOTIFICATION FLOW
+Notifications Roadmap Completed Resume Analyzed Application Reminder Profile Incomplete Skill Recommendation
+Notification Center Dashboard Bell Icon
+
+19. SETTINGS FLOW
+Tabs Account Security Notifications Appearance Actions Change Password Delete Account Export Data Logout
+
+20. FUTURE V2 FLOWS
+GitHub Integration Connect GitHub Analyze Repositories Skill Detection Project Detection LinkedIn Integration
+Import Profile Import Experience Import Certifications LeetCode Integration Fetch Problems Solved Update
+Readiness Score Placement Prediction AI Predicts Placement Probability Expected Salary Range Top Recruiters
+
+21. COMPLETE USER SUCCESS LOOP
+Create Account ↓ Build Profile ↓ Upload Resume ↓ Analyze Skills ↓ Discover Roles ↓ Check Eligibility ↓ Identify
+Gaps ↓ Generate Roadmap ↓ Learn Skills ↓ Build Projects ↓ Apply To Companies ↓ Track Progress ↓ Prepare
+Interviews ↓ Get Placed ↓ Continue Upskilling
+
+END OF APPLICATION FLOW DOCUMENT
+--------------------------------------------------
+
+

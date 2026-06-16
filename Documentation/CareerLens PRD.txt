@@ -1,0 +1,67 @@
+CareerLens AI
+SUMMARY
+CareerLens AI is an AI-powered career intelligence platform that helps students understand their placement readiness,
+discover suitable job roles, identify skill gaps, track career progress, and receive personalized learning roadmaps.
+
+TECHNICAL SKILLS
+Vercel
+Supabase
+Next.js
+Tailwind CSS
+Node.js
+Next.js API Routes
+Claude Opus
+Gemini APIs
+JWT Authentication
+Supabase Row Level Security
+Encrypted User Data
+Secure File Uploads
+Rate Limiting
+API Protection
+
+VERSION
+1.0
+
+AUTHOR
+Mayan
+
+PRODUCT TYPE
+AI-Powered Career Intelligence & Placement Readiness Platform
+
+TARGET USERS
+College Students, Fresh Graduates, Placement Cell Coordinators
+
+PLATFORM
+Web Application
+
+PROBLEM STATEMENT
+Students often face the following challenges: Unsure which companies they qualify for; Unclear career direction; Lack
+of awareness about required skills; No centralized placement preparation dashboard; Difficulty understanding job
+descriptions; Lack of personalized career guidance; No measurable placement readiness score. Current solutions are
+fragmented across LinkedIn, Job portals, Placement websites, Resume tools, Course platforms. CareerLens
+consolidates everything into a single AI-powered ecosystem.
+
+CORE MODULES
+1) Authentication: Sign Up, Login, Forgot Password, Email Verification, Google Login, Logout. 2) User Profile:
+personal, professional, academic details, projects, career preferences. 3) Career Dashboard: readiness score, eligible
+companies, matched roles, skills, resume score, applications; trends and progress graphs. 4) AI Role Matching:
+suggested roles with match %, required/missing skills, salary range, learning path. 5) Company Eligibility Engine:
+eligibility by CGPA, skills, projects, certifications, experience for companies like Google, Microsoft, Amazon, Infosys,
+TCS, Wipro, Accenture, Cognizant, Capgemini, Deloitte, EY, PwC. 6) Skill Gap Analysis. 7) AI Roadmap Generator
+(30/60/90/180-day). 8) Resume Analyzer (ATS, keywords, strength, missing sections, suggestions, grammar). 9) Job
+Description Analyzer. 10) AI Career Coach. 11) Project Recommendation Engine. 12) Application Tracker. 13)
+Interview Preparation Hub. 14) Learning Resource Center.
+
+DATABASE DESIGN
+Tables: USERS, SKILLS, PROJECTS, CERTIFICATIONS, CAREER_ROLES, COMPANIES, ROADMAPS,
+RESUMES, APPLICATIONS, AI_CHAT_HISTORY.
+
+FUTURE FEATURES (V2)
+LinkedIn Import, GitHub Analysis, LeetCode Analysis, HackerRank Analysis, Company Interview Experiences,
+Placement Prediction AI, Referral Marketplace, AI Resume Builder, AI Portfolio Builder, Mobile App.
+
+MVP SCOPE (RELEASE V1 INCLUDES)
+Authentication, User Profile, Dashboard, Role Matching, Company Eligibility, Skill Gap Analysis, AI Roadmap
+Generator, Resume Analyzer, Career Coach, Application Tracker.
+
+

@@ -1,0 +1,795 @@
+# UI/UX DESIGN BRIEF
+
+# CareerLens
+
+### AI-Powered Career Guidance & Skill Development Platform
+
+---
+
+# Document Information
+
+**Project Name:** CareerLens
+
+**Document Type:** UI/UX Design Brief
+
+**Version:** 1.0
+
+**Prepared By:** CareerLens Development Team
+
+---
+
+# 1. Project Overview
+
+CareerLens is an AI-powered career guidance platform that helps students and professionals discover suitable career paths, identify skill gaps, follow personalized learning roadmaps, build resumes, and prepare for interviews.
+
+The user interface should inspire confidence, clarity, and motivation while maintaining a professional appearance suitable for students, fresh graduates, and working professionals.
+
+The design should reduce cognitive load by presenting information in a structured, intuitive, and visually engaging manner.
+
+---
+
+# 2. Design Vision
+
+The interface should feel like:
+
+• A personal career mentor
+
+• Modern and premium
+
+• Clean and distraction-free
+
+• Friendly and approachable
+
+• Professional yet welcoming
+
+• Data-driven but not overwhelming
+
+• Calm and trustworthy
+
+The experience should encourage users to continue learning without feeling intimidated.
+
+---
+
+# 3. Design Philosophy
+
+CareerLens should follow a **Minimalist Dashboard Design**.
+
+Key principles:
+
+• Simplicity over complexity
+
+• Consistent spacing
+
+• Strong visual hierarchy
+
+• Generous white space
+
+• Soft rounded corners
+
+• Easy navigation
+
+• Smooth interactions
+
+• Minimal visual noise
+
+• High readability
+
+• Responsive by default
+
+---
+
+# 4. Design Style
+
+The application should resemble modern SaaS products rather than traditional educational websites.
+
+Visual inspiration:
+
+• Notion
+
+• Linear
+
+• Stripe Dashboard
+
+• Vercel Dashboard
+
+• GitHub
+
+• Framer
+
+• Supabase Dashboard
+
+Characteristics:
+
+• Flat UI
+
+• Soft shadows
+
+• Rounded cards
+
+• Large typography
+
+• Spacious layouts
+
+• Minimal borders
+
+• Elegant icons
+
+• Clean data visualization
+
+---
+
+# 5. Brand Personality
+
+CareerLens should communicate:
+
+Professionalism
+
+Innovation
+
+Growth
+
+Trust
+
+Intelligence
+
+Guidance
+
+Achievement
+
+Confidence
+
+Curiosity
+
+Learning
+
+---
+
+# 6. Color Palette
+
+Primary Colors
+
+Deep Navy
+
+#0B132B
+
+Usage
+
+• Sidebar
+
+• Navigation
+
+• Hero background
+
+• Footer
+
+---
+
+Secondary Navy
+
+#1C2541
+
+Usage
+
+• Cards
+
+• Secondary backgrounds
+
+• Hover states
+
+---
+
+Slate Blue
+
+#3A506B
+
+Usage
+
+• Icons
+
+• Borders
+
+• Secondary text
+
+• Charts
+
+---
+
+Primary Accent
+
+#5BC0BE
+
+Usage
+
+• Buttons
+
+• Links
+
+• Progress bars
+
+• Active navigation
+
+• Charts
+
+• Highlights
+
+---
+
+Secondary Accent
+
+#6FFFE9
+
+Usage
+
+• Hover effects
+
+• Success indicators
+
+• Notifications
+
+• Badges
+
+• Decorative elements
+
+---
+
+Neutral Colors
+
+Background
+
+#F8FAFC
+
+Card Background
+
+#FFFFFF
+
+Primary Text
+
+#111827
+
+Secondary Text
+
+#6B7280
+
+Border
+
+#E5E7EB
+
+Success
+
+#22C55E
+
+Warning
+
+#F59E0B
+
+Error
+
+#EF4444
+
+---
+
+# 7. Visual Identity
+
+The UI should feel
+
+Bright
+
+Modern
+
+Calm
+
+Organized
+
+Friendly
+
+Readable
+
+Avoid
+
+Heavy gradients
+
+Glassmorphism
+
+Excessive animations
+
+Busy interfaces
+
+Dark heavy backgrounds across entire pages
+
+Neon colors
+
+Overly decorative elements
+
+---
+
+# 8. Typography
+
+Primary Font
+
+Inter
+
+Fallback
+
+Poppins
+
+Hierarchy
+
+H1
+
+40–48px
+
+Bold
+
+H2
+
+32px
+
+Semi Bold
+
+H3
+
+24px
+
+Semi Bold
+
+H4
+
+20px
+
+Medium
+
+Body
+
+16px
+
+Regular
+
+Caption
+
+14px
+
+Regular
+
+Small Labels
+
+12px
+
+Medium
+
+Typography should prioritize readability with generous line spacing and clear section separation.
+
+---
+
+# 9. Layout Structure
+
+The application uses a fixed dashboard layout.
+
+```text
+---------------------------------------------------------
+ Top Navigation
+---------------------------------------------------------
+ Sidebar | Main Content Area
+         |
+         |
+         |
+         |
+---------------------------------------------------------
+```
+
+Sidebar Width
+
+280px
+
+Top Navigation
+
+72px
+
+Main Content
+
+Responsive
+
+Maximum Width
+
+1440px
+
+Content Padding
+
+32px
+
+---
+
+# 10. Navigation Design
+
+Left Sidebar
+
+Contains
+
+Dashboard
+
+Career Assessment
+
+AI Recommendations
+
+Skill Gap Analysis
+
+Learning Roadmap
+
+Learning Resources
+
+Projects
+
+Resume Builder
+
+Interview Preparation
+
+Progress Tracker
+
+Achievements
+
+Career Insights
+
+Settings
+
+Sidebar Behavior
+
+Fixed
+
+Collapsible
+
+Icons + Labels
+
+Smooth transitions
+
+Active page highlighted
+
+---
+
+# 11. Dashboard Design
+
+Dashboard should contain modular cards.
+
+Widgets include:
+
+Welcome Card
+
+Learning Progress
+
+Career Recommendation
+
+Upcoming Tasks
+
+Skill Progress
+
+Learning Streak
+
+Resume Completion
+
+Recent Activity
+
+Achievements
+
+Weekly Goals
+
+Recommended Courses
+
+Quick Actions
+
+Cards should use rounded corners, subtle elevation, and consistent spacing.
+
+---
+
+# 12. Component Library
+
+Buttons
+
+Primary
+
+Filled using #5BC0BE
+
+Secondary
+
+Outlined
+
+Danger
+
+Red
+
+Success
+
+Green
+
+Cards
+
+White background
+
+16–20px padding
+
+16px radius
+
+Subtle shadow
+
+Inputs
+
+Rounded
+
+Minimal border
+
+Clear focus state
+
+Dropdowns
+
+Simple
+
+Searchable where appropriate
+
+Tables
+
+Minimal borders
+
+Alternating row hover
+
+Pagination
+
+Cards over dense grids where possible
+
+---
+
+# 13. Iconography
+
+Style
+
+Outlined icons
+
+Consistent stroke width
+
+Simple
+
+Modern
+
+Recommended icon set
+
+Lucide Icons
+
+Icons should support quick recognition without overwhelming the interface.
+
+---
+
+# 14. Illustrations
+
+Use friendly vector illustrations for:
+
+Onboarding
+
+Empty states
+
+Career discovery
+
+Learning milestones
+
+Achievements
+
+404 pages
+
+Illustrations should reinforce progress and learning.
+
+---
+
+# 15. Data Visualization
+
+Use clean charts.
+
+Preferred
+
+Line Charts
+
+Bar Charts
+
+Donut Charts
+
+Progress Rings
+
+Skill Radar Charts
+
+Charts should emphasize insight rather than decoration.
+
+---
+
+# 16. Motion Design
+
+Animation duration
+
+150–250 ms
+
+Use for
+
+Hover
+
+Navigation
+
+Sidebar collapse
+
+Card appearance
+
+Button interactions
+
+Loading states
+
+Avoid excessive motion that distracts from learning.
+
+---
+
+# 17. Responsive Design
+
+Desktop
+
+1440px+
+
+Laptop
+
+1024px+
+
+Tablet
+
+768px+
+
+Mobile
+
+375px+
+
+Sidebar becomes a hamburger menu on smaller screens while preserving access to all features.
+
+---
+
+# 18. Accessibility
+
+Minimum contrast ratio
+
+4.5:1
+
+Keyboard navigation
+
+Supported
+
+Visible focus indicators
+
+Required
+
+Readable typography
+
+Required
+
+Color should never be the only indicator of status.
+
+---
+
+# 19. UX Principles
+
+The interface should always:
+
+Reduce clicks
+
+Keep important actions visible
+
+Provide immediate feedback
+
+Guide users toward next steps
+
+Celebrate achievements
+
+Highlight progress
+
+Maintain consistency across pages
+
+Prioritize readability over visual effects
+
+---
+
+# 20. Page List
+
+Public Pages
+
+Landing Page
+
+About
+
+Features
+
+Pricing (Future)
+
+Contact
+
+Login
+
+Register
+
+Forgot Password
+
+Authenticated Pages
+
+Dashboard
+
+Career Assessment
+
+AI Recommendations
+
+Skill Gap Analysis
+
+Learning Roadmap
+
+Learning Resources
+
+Projects
+
+Resume Builder
+
+Interview Preparation
+
+Progress Tracker
+
+Achievements
+
+Career Insights
+
+Notifications
+
+Settings
+
+Profile
+
+---
+
+# 21. User Experience Goals
+
+A new user should be able to:
+
+Create an account within 2 minutes
+
+Complete onboarding within 5 minutes
+
+Understand their dashboard immediately after onboarding
+
+Reach any feature within one click from the sidebar
+
+Navigate the application without additional guidance
+
+---
+
+# 22. Design Keywords
+
+Minimal
+
+Elegant
+
+Professional
+
+Welcoming
+
+Modern
+
+Trustworthy
+
+Accessible
+
+Focused
+
+Data-driven
+
+Student-friendly
+
+Premium
+
+Organized
+
+Motivating
+
+---
+
+# 23. Final Design Objective
+
+CareerLens should feel like a premium productivity platform rather than a traditional educational website.
+
+Users should experience the platform as a personal career mentor—one that is visually calm, easy to navigate, and motivating to use every day. The design should balance professionalism with warmth, encouraging users to build skills and track progress through an intuitive, dashboard-first experience.
+
+---
+
+# End of UI/UX Design Brief

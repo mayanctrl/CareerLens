@@ -1,0 +1,288 @@
+# TECHNICAL REQUIREMENTS DOCUMENT (TRD)
+
+# CareerLens
+
+### AI-Powered Career Guidance and Skill Development Platform
+
+---
+
+# Document Information
+
+**Project Name:** CareerLens
+
+**Document Type:** Technical Requirements Document (TRD)
+
+**Version:** 1.0
+
+**Prepared By:** CareerLens Development Team
+
+**Status:** Draft
+
+---
+
+# Table of Contents
+
+1. Introduction
+2. Purpose
+3. Technical Overview
+4. System Architecture
+5. Technology Stack
+6. Development Tools
+7. System Modules
+8. Frontend Architecture
+9. Backend Architecture
+10. Database Architecture
+11. Authentication System
+12. API Architecture
+13. AI Integration
+14. Security Architecture
+15. Performance Requirements
+16. Scalability
+17. Deployment Architecture
+18. Development Workflow
+19. Folder Structure
+20. Coding Standards
+21. Testing Strategy
+22. Monitoring & Logging
+23. Backup & Recovery
+24. Future Technical Enhancements
+
+---
+
+# 1. Introduction
+
+This Technical Requirements Document (TRD) defines the technical architecture, technologies, system components, implementation guidelines, deployment strategy, and development standards for CareerLens.
+
+The objective of this document is to provide developers with a complete understanding of how the system should be designed, developed, deployed, maintained, and scaled.
+
+---
+
+# 2. Purpose
+
+The purpose of this document is to:
+
+• Define the technical architecture.
+• Standardize development practices.
+• Specify technologies used.
+• Describe communication between system components.
+• Explain deployment workflow.
+• Document database design.
+• Define security measures.
+• Establish coding standards.
+• Guide future maintenance and scalability.
+
+---
+
+# 3. System Overview
+
+CareerLens is a modern web application built using a client-server architecture.
+
+The application enables users to:
+
+• Register and authenticate securely.
+• Complete career assessments.
+• Receive AI-powered career recommendations.
+• View personalized learning roadmaps.
+• Track learning progress.
+• Build ATS-friendly resumes.
+• Prepare for interviews.
+• Access recommended projects and learning resources.
+
+---
+
+# 4. High-Level Architecture
+
+```
+            User
+              │
+              ▼
+    React + Vite Frontend
+              │
+    REST API Requests
+              │
+              ▼
+     Node.js + Express API
+              │
+   Business Logic Layer
+              │
+              ▼
+    Supabase PostgreSQL Database
+              │
+              ▼
+      Authentication & Storage
+```
+
+---
+
+# 5. Technology Stack
+
+## Frontend
+
+Framework
+• React
+
+Build Tool
+• Vite
+
+Styling
+• Tailwind CSS
+
+Routing
+• React Router
+
+State Management
+• Context API (Version 1)
+
+HTTP Client
+• Axios / Fetch API
+
+Charts
+• Recharts
+
+Form Validation
+• React Hook Form
+
+---
+
+## Backend
+
+Runtime
+• Node.js
+
+Framework
+• Express.js
+
+API Style
+• REST API
+
+Authentication
+• Supabase Authentication
+
+Validation
+• Zod / Express Validator
+
+Environment Variables
+• dotenv
+
+---
+
+## Database
+
+Platform
+• Supabase
+
+Database Engine
+• PostgreSQL
+
+Database Features
+
+• Row Level Security (RLS)
+• SQL Views
+• Foreign Keys
+• Stored Procedures (future)
+• Database Triggers (future)
+
+---
+
+## Deployment
+
+Frontend Hosting
+
+• Vercel
+
+Backend Hosting
+
+• To be finalized (Render/Railway or equivalent)
+
+Database Hosting
+
+• Supabase Cloud
+
+Version Control
+
+• Git + GitHub
+
+---
+
+# 6. Development Tools
+
+The following tools assist during the design and development process but are **not part of the deployed application**.
+
+## UI/UX Design
+
+Google Stitch
+
+Purpose
+
+• Generate interface layouts
+• Create page designs
+• Produce reusable UI concepts
+• Accelerate UI prototyping
+
+---
+
+## AI Development Assistance
+
+Claude Opus
+
+Purpose
+
+• Generate frontend code
+• Generate backend boilerplate
+• Assist with debugging
+• Accelerate feature implementation
+
+Note:
+
+Claude Opus is used solely as a development assistant. It is not integrated into CareerLens, is not accessed by end users, and is not required for the application's execution after deployment.
+
+---
+
+## Documentation
+
+ChatGPT
+
+Purpose
+
+• Product documentation
+• PRD
+• TRD
+• Technical planning
+• System documentation
+• Feature documentation
+
+---
+
+# 7. Functional Modules
+
+The application consists of the following modules:
+
+• Authentication Module
+
+• User Profile Module
+
+• Career Assessment Module
+
+• AI Recommendation Module
+
+• Skill Gap Analysis Module
+
+• Learning Roadmap Module
+
+• Learning Resources Module
+
+• Dashboard Module
+
+• Progress Tracking Module
+
+• Resume Builder Module
+
+• Interview Preparation Module
+
+• Notification Module
+
+• Admin Module (Future)
+
+---
+
+# End of TRD - Part 1

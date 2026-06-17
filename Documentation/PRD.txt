@@ -1,0 +1,303 @@
+# PRODUCT REQUIREMENTS DOCUMENT (PRD)
+
+# CareerLens
+
+### AI-Powered Career Guidance and Skill Development Platform
+
+---
+
+# Document Information
+
+**Product Name:** CareerLens
+
+**Document Type:** Product Requirements Document (PRD)
+
+**Version:** 1.0
+
+**Prepared By:** CareerLens Development Team
+
+**Status:** Draft
+
+---
+
+# Table of Contents
+
+1. Executive Summary
+2. Vision Statement
+3. Problem Statement
+4. Solution Overview
+5. Product Goals
+6. Objectives
+7. Target Audience
+8. User Personas
+9. Market Analysis
+10. Competitor Analysis
+11. Product Scope
+12. Functional Requirements
+13. Non-Functional Requirements
+14. User Journey
+15. User Stories
+16. Feature Specifications
+17. AI Recommendation Engine
+18. Learning Roadmaps
+19. Skill Gap Analysis
+20. Resume Builder
+21. Dashboard
+22. Database Design
+23. API Requirements
+24. Security Requirements
+25. Performance Requirements
+26. UI/UX Requirements
+27. Accessibility
+28. Analytics
+29. Notifications
+30. Future Scope
+31. Risks
+32. Assumptions
+33. Success Metrics
+34. Appendix
+
+---
+
+# 1. Executive Summary
+
+CareerLens is an AI-powered web application designed to bridge the gap between education and employability by helping students discover suitable career paths, identify skill gaps, receive personalized learning roadmaps, and prepare for placements through project recommendations, resume building, and interview preparation.
+
+Unlike conventional career guidance platforms that only recommend careers based on questionnaires, CareerLens functions as a complete career development ecosystem. It continuously tracks user progress, adapts recommendations, and provides actionable steps toward becoming industry-ready.
+
+The platform aims to simplify career planning through intelligent recommendations while empowering users with curated learning resources, practical projects, and measurable progress tracking.
+
+---
+
+# 2. Vision Statement
+
+To become the most trusted AI-powered career development platform that enables every learner to make informed career decisions, acquire industry-relevant skills, and confidently transition into their dream profession.
+
+---
+
+# 3. Mission Statement
+
+CareerLens empowers students and professionals with personalized AI-driven career guidance, skill development plans, and practical learning experiences that reduce confusion and accelerate career growth.
+
+---
+
+# 4. Problem Statement
+
+Many students struggle with career planning because they:
+
+• Lack awareness of available career opportunities.
+• Do not understand which skills employers require.
+• Learn random technologies without structured direction.
+• Follow generic online roadmaps.
+• Receive conflicting advice from multiple sources.
+• Have difficulty selecting projects relevant to their goals.
+• Build resumes without understanding ATS optimization.
+• Enter placements without sufficient interview preparation.
+
+Current career platforms often focus on only one aspect, such as aptitude tests, online courses, or resume creation, requiring users to switch between multiple services.
+
+---
+
+# 5. Proposed Solution
+
+CareerLens integrates career discovery, AI recommendations, learning roadmaps, project suggestions, resume generation, interview preparation, and progress tracking into a single platform.
+
+The application analyzes a user's interests, strengths, goals, and current skills to recommend suitable careers and provide personalized action plans.
+
+---
+
+# 6. Product Goals
+
+Primary Goals
+
+• Help users discover suitable careers.
+• Reduce uncertainty in career planning.
+• Increase employability.
+• Provide structured learning paths.
+• Improve placement readiness.
+• Track long-term progress.
+
+Secondary Goals
+
+• Build a learning community.
+• Integrate industry trends.
+• Provide mentor guidance.
+• Enable recruiter visibility.
+• Offer certification tracking.
+
+---
+
+# 7. Objectives
+
+The platform should enable users to:
+
+• Discover careers based on interests and skills.
+• Understand required competencies.
+• Learn through structured roadmaps.
+• Build portfolio projects.
+• Create ATS-friendly resumes.
+• Prepare for interviews.
+• Monitor learning progress.
+• Stay updated with industry trends.
+
+---
+
+# 8. Target Audience
+
+Primary Audience
+
+• High school students exploring careers.
+• Diploma students.
+• Undergraduate students.
+• Final-year students.
+• Fresh graduates.
+
+Secondary Audience
+
+• Working professionals seeking career transitions.
+• Career counselors.
+• Educational institutions.
+• Placement cells.
+• Mentors.
+
+---
+
+# 9. User Personas
+
+## Persona 1
+
+Name:
+Rahul Sharma
+
+Age:
+20
+
+Occupation:
+Computer Science Student
+
+Pain Points
+
+• Doesn't know which specialization to choose.
+• Watches random tutorials.
+• Has no roadmap.
+
+Goals
+
+• Become a Software Engineer.
+• Build projects.
+• Crack campus placements.
+
+---
+
+## Persona 2
+
+Name:
+Priya Verma
+
+Age:
+23
+
+Occupation:
+Graduate
+
+Pain Points
+
+• Wants to switch into Data Science.
+• Unsure where to start.
+
+Goals
+
+• Learn required skills.
+• Build portfolio.
+• Land first data-related job.
+
+---
+
+## Persona 3
+
+Name:
+Arjun Singh
+
+Age:
+17
+
+Occupation:
+School Student
+
+Pain Points
+
+• Confused between Engineering and Design.
+
+Goals
+
+• Explore career options.
+• Understand required skills.
+• Make informed decisions.
+
+---
+
+# 10. Value Proposition
+
+CareerLens combines:
+
+• AI Career Guidance
+• Personalized Learning Roadmaps
+• Skill Gap Analysis
+• Resume Builder
+• Project Recommendations
+• Interview Preparation
+• Progress Tracking
+• Career Insights
+
+into a single intelligent platform.
+
+---
+
+# 11. Product Scope
+
+Included in Version 1
+
+• User authentication
+• User profile management
+• Career assessment questionnaire
+• AI career recommendation engine
+• Skill gap analysis
+• Personalized roadmap generation
+• Learning resources
+• Dashboard
+• Progress tracking
+• Resume builder
+• Project recommendation system
+• Interview preparation module
+• Notifications
+• Responsive web interface
+
+Excluded from Version 1
+
+• Mobile application
+• Video calling with mentors
+• Real-time recruiter portal
+• AI voice assistant
+• Multi-language support
+• Paid certifications
+• Community forums
+• Live coding contests
+
+---
+
+# 12. Success Criteria
+
+The product will be considered successful if:
+
+• Users complete the career assessment.
+• Users follow recommended roadmaps.
+• Learning completion rates increase.
+• Resume downloads increase.
+• Daily active users grow consistently.
+• User retention improves month over month.
+• Users report increased confidence in career decisions.
+• Students successfully secure internships and placements.
+
+---
+
+# End of PRD - Part 1

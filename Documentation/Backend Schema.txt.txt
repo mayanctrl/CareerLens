@@ -1,0 +1,881 @@
+# BACKEND ARCHITECTURE & DATABASE DESIGN
+
+# CareerLens
+
+### Backend Architecture, Database Schema & API Foundation
+
+---
+
+# Document Information
+
+Project Name: CareerLens
+
+Document Type: Backend Architecture & Database Design
+
+Version: 1.0
+
+Database: PostgreSQL (Supabase)
+
+Backend: Node.js + Express.js
+
+Authentication: Supabase Auth
+
+---
+
+# 1. Backend Overview
+
+CareerLens follows a modern three-tier architecture.
+
+```text
+                        Client (React)
+
+                              │
+                       REST API (HTTPS)
+
+                              │
+
+                    Express.js Backend Server
+
+          Authentication
+          User Management
+          Business Logic
+          AI Services
+          Resume Services
+          Progress Tracking
+
+                              │
+
+                     Supabase PostgreSQL
+
+      Tables
+      Views
+      Row Level Security
+      Storage
+      Authentication
+```
+
+---
+
+# 2. Backend Modules
+
+The backend consists of the following modules.
+
+Authentication Module
+
+Profile Module
+
+Career Assessment Module
+
+AI Recommendation Module
+
+Skill Management Module
+
+Roadmap Module
+
+Learning Resources Module
+
+Project Recommendation Module
+
+Resume Module
+
+Interview Module
+
+Progress Module
+
+Notification Module
+
+Analytics Module
+
+Admin Module
+
+---
+
+# 3. Database Architecture
+
+Database Engine
+
+PostgreSQL
+
+Platform
+
+Supabase
+
+Total Expected Tables
+
+Approximately 20–25
+
+Database Naming Convention
+
+snake_case
+
+Primary Keys
+
+UUID
+
+Foreign Keys
+
+UUID
+
+Timestamp Fields
+
+created_at
+
+updated_at
+
+deleted_at (soft delete where applicable)
+
+---
+
+# 4. Entity Relationship Overview
+
+```text
+users
+ │
+ ├──────── profile
+ │
+ ├──────── assessments
+ │
+ ├──────── recommendations
+ │
+ ├──────── roadmaps
+ │
+ ├──────── skills
+ │
+ ├──────── user_skills
+ │
+ ├──────── projects
+ │
+ ├──────── resumes
+ │
+ ├──────── interview_progress
+ │
+ ├──────── achievements
+ │
+ ├──────── notifications
+ │
+ └──────── learning_progress
+```
+
+---
+
+# 5. Database Tables
+
+---
+
+TABLE 1
+
+profiles
+
+Purpose
+
+Stores complete user information.
+
+Columns
+
+id (UUID)
+
+auth_id
+
+full_name
+
+email
+
+phone
+
+college
+
+degree
+
+branch
+
+year
+
+bio
+
+linkedin_url
+
+github_url
+
+portfolio_url
+
+career_goal
+
+current_level
+
+profile_image
+
+created_at
+
+updated_at
+
+Relationships
+
+One profile belongs to one authenticated user.
+
+---
+
+TABLE 2
+
+career_assessments
+
+Purpose
+
+Stores assessment responses.
+
+Columns
+
+assessment_id
+
+user_id
+
+interest_score
+
+aptitude_score
+
+personality_score
+
+technical_score
+
+communication_score
+
+leadership_score
+
+creativity_score
+
+overall_score
+
+assessment_date
+
+---
+
+TABLE 3
+
+career_recommendations
+
+Columns
+
+recommendation_id
+
+user_id
+
+career_name
+
+match_percentage
+
+salary_range
+
+growth_rate
+
+difficulty
+
+description
+
+generated_at
+
+---
+
+TABLE 4
+
+skills_master
+
+Purpose
+
+Master skill repository.
+
+Columns
+
+skill_id
+
+skill_name
+
+category
+
+difficulty
+
+description
+
+icon
+
+created_at
+
+Examples
+
+HTML
+
+CSS
+
+JavaScript
+
+Python
+
+React
+
+Node
+
+Machine Learning
+
+SQL
+
+Git
+
+Docker
+
+Kubernetes
+
+AWS
+
+---
+
+TABLE 5
+
+user_skills
+
+Purpose
+
+Tracks user proficiency.
+
+Columns
+
+id
+
+user_id
+
+skill_id
+
+proficiency
+
+status
+
+progress
+
+last_updated
+
+---
+
+TABLE 6
+
+career_skill_mapping
+
+Purpose
+
+Maps careers to required skills.
+
+Columns
+
+id
+
+career_name
+
+skill_id
+
+priority
+
+required_level
+
+---
+
+TABLE 7
+
+learning_roadmaps
+
+Columns
+
+roadmap_id
+
+user_id
+
+career_name
+
+roadmap_title
+
+estimated_duration
+
+completion_percentage
+
+created_at
+
+---
+
+TABLE 8
+
+roadmap_steps
+
+Columns
+
+step_id
+
+roadmap_id
+
+week_number
+
+title
+
+description
+
+resource_link
+
+estimated_hours
+
+status
+
+---
+
+TABLE 9
+
+learning_resources
+
+Columns
+
+resource_id
+
+title
+
+category
+
+resource_type
+
+difficulty
+
+provider
+
+url
+
+thumbnail
+
+duration
+
+rating
+
+---
+
+TABLE 10
+
+projects
+
+Columns
+
+project_id
+
+title
+
+description
+
+difficulty
+
+tech_stack
+
+estimated_duration
+
+github_reference
+
+deployment_link
+
+career_category
+
+---
+
+TABLE 11
+
+user_projects
+
+Columns
+
+id
+
+user_id
+
+project_id
+
+completion
+
+github_url
+
+live_demo
+
+started_at
+
+completed_at
+
+---
+
+TABLE 12
+
+resume_builder
+
+Columns
+
+resume_id
+
+user_id
+
+template
+
+education
+
+experience
+
+skills
+
+projects
+
+certifications
+
+languages
+
+resume_pdf
+
+updated_at
+
+---
+
+TABLE 13
+
+interview_questions
+
+Columns
+
+question_id
+
+category
+
+difficulty
+
+question
+
+answer
+
+tags
+
+---
+
+TABLE 14
+
+user_interview_progress
+
+Columns
+
+id
+
+user_id
+
+question_id
+
+attempted
+
+correct
+
+attempt_date
+
+---
+
+TABLE 15
+
+achievements
+
+Columns
+
+achievement_id
+
+title
+
+description
+
+badge
+
+points
+
+---
+
+TABLE 16
+
+user_achievements
+
+Columns
+
+id
+
+user_id
+
+achievement_id
+
+earned_date
+
+---
+
+TABLE 17
+
+notifications
+
+Columns
+
+notification_id
+
+user_id
+
+title
+
+message
+
+type
+
+read
+
+created_at
+
+---
+
+TABLE 18
+
+learning_progress
+
+Columns
+
+progress_id
+
+user_id
+
+hours_learned
+
+skills_completed
+
+projects_completed
+
+roadmap_progress
+
+weekly_goal
+
+monthly_goal
+
+---
+
+TABLE 19
+
+career_insights
+
+Columns
+
+career_id
+
+career_name
+
+average_salary
+
+future_demand
+
+industry_growth
+
+description
+
+---
+
+TABLE 20
+
+activity_logs
+
+Columns
+
+activity_id
+
+user_id
+
+activity_type
+
+description
+
+ip_address
+
+device
+
+created_at
+
+---
+
+# 6. Storage Buckets (Supabase)
+
+avatars/
+
+resume-pdfs/
+
+project-images/
+
+course-certificates/
+
+documents/
+
+---
+
+# 7. Relationships
+
+profiles
+
+1 → 1 auth.users
+
+profiles
+
+1 → many assessments
+
+profiles
+
+1 → many resumes
+
+profiles
+
+1 → many projects
+
+profiles
+
+1 → many roadmaps
+
+profiles
+
+1 → many notifications
+
+roadmaps
+
+1 → many roadmap_steps
+
+projects
+
+many ↔ many users
+
+skills
+
+many ↔ many careers
+
+skills
+
+many ↔ many users
+
+---
+
+# 8. Row Level Security
+
+Every table containing user data must enable Row Level Security (RLS).
+
+Policies:
+
+Users can only read their own records.
+
+Users can only update their own records.
+
+Users cannot access other users' data.
+
+Public reference tables (skills_master, career_insights, learning_resources, interview_questions) are readable by all authenticated users.
+
+---
+
+# 9. Indexing Strategy
+
+Indexes should be created on:
+
+email
+
+user_id
+
+career_name
+
+skill_id
+
+assessment_date
+
+created_at
+
+status
+
+category
+
+These indexes improve query performance for dashboard loading and filtering.
+
+---
+
+# 10. API Structure (High Level)
+
+Authentication
+
+POST /auth/register
+
+POST /auth/login
+
+POST /auth/logout
+
+User
+
+GET /profile
+
+PUT /profile
+
+Career
+
+POST /assessment
+
+GET /recommendations
+
+GET /career/:id
+
+Skills
+
+GET /skills
+
+POST /user-skills
+
+PUT /user-skills/:id
+
+Roadmap
+
+GET /roadmap
+
+POST /roadmap
+
+Projects
+
+GET /projects
+
+POST /projects
+
+Resume
+
+GET /resume
+
+POST /resume
+
+Interview
+
+GET /questions
+
+POST /submit-answer
+
+Progress
+
+GET /progress
+
+GET /dashboard
+
+Notifications
+
+GET /notifications
+
+PUT /notifications/read
+
+---
+
+# 11. Security Best Practices
+
+Use JWT authentication via Supabase Auth.
+
+Store passwords only through Supabase Auth (never in application tables).
+
+Validate all request payloads before processing.
+
+Use parameterized queries to prevent SQL injection.
+
+Enable HTTPS for all API traffic.
+
+Apply rate limiting to authentication endpoints.
+
+Use environment variables for all secrets and API keys.
+
+Implement audit logging for sensitive operations.
+
+---
+
+# End of Backend Architecture & Database Design – Part 1

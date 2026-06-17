@@ -1,122 +1,105 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ToastProvider } from './components/common/Toast';
+import Loader from './components/common/Loader';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Lazy loaded pages to match implementation plan
+// Public
+const LandingPage = React.lazy(() => import('./pages/public/LandingPage'));
+const LoginPage = React.lazy(() => import('./pages/public/LoginPage'));
+const RegisterPage = React.lazy(() => import('./pages/public/RegisterPage'));
+const ForgotPasswordPage = React.lazy(() => import('./pages/public/ForgotPasswordPage'));
+const NotFoundPage = React.lazy(() => import('./pages/public/NotFoundPage'));
 
+// Dashboard (Protected)
+const DashboardLayout = React.lazy(() => import('./components/layout/DashboardLayout'));
+const DashboardPage = React.lazy(() => import('./pages/dashboard/DashboardPage'));
+const AssessmentPage = React.lazy(() => import('./pages/dashboard/AssessmentPage'));
+const RecommendationsPage = React.lazy(() => import('./pages/dashboard/RecommendationsPage'));
+const RoadmapPage = React.lazy(() => import('./pages/dashboard/RoadmapPage'));
+const ProjectsPage = React.lazy(() => import('./pages/dashboard/ProjectsPage'));
+// Stubs for other pages
+const PlaceholderPage = ({ title }) => (
+  <div className="flex items-center justify-center h-full min-h-[60vh]">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold text-white mb-4">{title}</h1>
+      <p className="text-[#BDC9C8]">This page is under construction.</p>
+    </div>
+  </div>
+);
+
+// Auth Guard Component
+const ProtectedRoute = () => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) return <Loader fullScreen text="Verifying session..." />;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+
+  return <Outlet />;
+};
+
+// Public Only Guard (redirects logged in users away from login/register)
+const PublicOnlyRoute = () => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) return <Loader fullScreen />;
+  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
+
+  return <Outlet />;
+};
+
+const AppRoutes = () => {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <React.Suspense fallback={<Loader fullScreen text="Loading CareerLens..." />}>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
+        
+        {/* Auth Routes (Public Only) */}
+        <Route element={<PublicOnlyRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        </Route>
 
-      <div className="ticks"></div>
+        {/* Protected Dashboard Routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/assessment" element={<AssessmentPage />} />
+            <Route path="/recommendations" element={<RecommendationsPage />} />
+            <Route path="/skills" element={<PlaceholderPage title="Skill Gap Analysis" />} />
+            <Route path="/roadmap" element={<RoadmapPage />} />
+            <Route path="/resources" element={<PlaceholderPage title="Learning Resources" />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/resume" element={<PlaceholderPage title="Resume Builder" />} />
+            <Route path="/interview" element={<PlaceholderPage title="Interview Prep" />} />
+            <Route path="/progress" element={<PlaceholderPage title="Progress Tracker" />} />
+            <Route path="/achievements" element={<PlaceholderPage title="Achievements" />} />
+            <Route path="/insights" element={<PlaceholderPage title="Career Insights" />} />
+            <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
+            <Route path="/notifications" element={<PlaceholderPage title="Notifications" />} />
+            <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
+          </Route>
+        </Route>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* 404 Catch All */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </React.Suspense>
+  );
+};
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
+const App = () => {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <ToastProvider />
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;

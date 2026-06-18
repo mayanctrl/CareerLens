@@ -1,647 +1,666 @@
-# IMPLEMENTATION PLAN
+# CareerLens — Complete Implementation Plan
 
-# CareerLens
-
-### AI-Powered Career Guidance & Skill Development Platform
+> **Goal:** Build the complete CareerLens AI-powered career guidance platform — a production-ready web application with full frontend, backend, database, and authentication.
 
 ---
 
-# Document Information
+## User Review Required
 
-**Project Name:** CareerLens
+> [!IMPORTANT]
+> **Supabase Credentials Required:** You will need to provide your Supabase project URL and anon/service_role keys before Phase 2 begins. I'll create `.env.example` templates for both frontend and backend.
 
-**Document Type:** Implementation Plan
+> [!IMPORTANT]
+> **Design Theme Decision:** Your Stitch project (ID: 18343516348982703036) uses a **dark theme** with deep navy backgrounds (#0B132B), teal accents (#5BC0BE/#6FFFE9), and Geist/Inter typography. The UI/UX Design Brief also mentions light backgrounds (#F8FAFC). **I will implement the dark theme as the primary design** (matching the Stitch project), with the light theme color palette available as a secondary option in Settings. Please confirm this is acceptable.
 
-**Version:** 1.0
+> [!WARNING]
+> **AI Recommendation Engine:** The PRD describes "AI-powered career recommendations." Since no external AI API (OpenAI, Gemini, etc.) is specified in the TRD, I will implement a **rule-based recommendation engine** using weighted scoring algorithms based on assessment responses, skill mappings, and career data. This can be replaced with an AI API integration later. Confirm if you'd like me to integrate a specific AI API instead.
 
-**Prepared By:** CareerLens Development Team
-
-**Project Duration:** Approximately 12 Weeks
-
----
-
-# 1. Project Objective
-
-The objective of this implementation plan is to define the step-by-step development process for CareerLens, ensuring a structured, modular, and scalable implementation.
-
-The project will be developed incrementally, with each phase building upon the previous one while maintaining a deployable and testable application.
+> [!IMPORTANT]
+> **Tailwind CSS Version:** The user prompt specifies Tailwind CSS. I will use **Tailwind CSS v4** (latest) unless you specify otherwise.
 
 ---
 
-# 2. Development Methodology
+## Open Questions
 
-Development Model
-
-**Agile (Sprint-Based)**
-
-Sprint Duration
-
-**2 Weeks**
-
-Development Approach
-
-• Modular development
-
-• Component-first frontend
-
-• API-first backend
-
-• Database-first design
-
-• Continuous testing
-
-• Incremental deployment
+1. **Do you have existing Supabase credentials** (project URL + anon key + service role key), or should I document the setup steps for you to create a new Supabase project?
+2. **Resume PDF generation** — should I use a client-side library (html2pdf.js / jsPDF) or server-side generation (Puppeteer)?
+3. **Should the landing page be a separate public route** (`/`) with the dashboard at `/dashboard`, or should authenticated users be redirected immediately to the dashboard?
+4. **Any preference for the icon library?** The design brief recommends Lucide Icons — I'll use `lucide-react`.
 
 ---
 
-# 3. Technology Stack
+## Architecture Overview
 
-Frontend
+```mermaid
+graph TB
+    subgraph "Frontend - React + Vite"
+        A[React Router] --> B[Public Pages]
+        A --> C[Protected Pages]
+        B --> B1[Landing Page]
+        B --> B2[Login / Register]
+        B --> B3[Forgot Password]
+        C --> C1[Dashboard]
+        C --> C2[Career Assessment]
+        C --> C3[AI Recommendations]
+        C --> C4[Skill Gap Analysis]
+        C --> C5[Learning Roadmap]
+        C --> C6[Learning Resources]
+        C --> C7[Projects]
+        C --> C8[Resume Builder]
+        C --> C9[Interview Prep]
+        C --> C10[Progress Tracker]
+        C --> C11[Achievements]
+        C --> C12[Career Insights]
+        C --> C13[Settings / Profile]
+        C --> C14[Notifications]
+    end
 
-• React
+    subgraph "Backend - Node.js + Express"
+        D[Express Server] --> E[Auth Middleware]
+        D --> F[Route Handlers]
+        F --> F1[Auth Routes]
+        F --> F2[Profile Routes]
+        F --> F3[Assessment Routes]
+        F --> F4[Recommendation Routes]
+        F --> F5[Skills Routes]
+        F --> F6[Roadmap Routes]
+        F --> F7[Resources Routes]
+        F --> F8[Projects Routes]
+        F --> F9[Resume Routes]
+        F --> F10[Interview Routes]
+        F --> F11[Progress Routes]
+        F --> F12[Notification Routes]
+        F --> F13[Insights Routes]
+    end
 
-• Vite
+    subgraph "Supabase"
+        G[PostgreSQL DB]
+        H[Supabase Auth]
+        I[Storage Buckets]
+    end
 
-• Tailwind CSS
-
-Backend
-
-• Node.js
-
-• Express.js
-
-Database
-
-• Supabase PostgreSQL
-
-Authentication
-
-• Supabase Auth
-
-Deployment
-
-• Vercel (Frontend)
-
-• Backend deployment platform (Render/Railway or equivalent)
-
-• Supabase Cloud
-
-Version Control
-
-• Git
-
-• GitHub
-
-Development Assistance
-
-• Google Stitch – UI/UX generation
-
-• Claude Opus – Code generation assistance
-
-• ChatGPT – Documentation, planning, architecture
-
----
-
-# 4. Development Workflow
-
-```text
-Requirements
-      │
-      ▼
-Documentation
-      │
-      ▼
-UI/UX Design (Google Stitch)
-      │
-      ▼
-Database Design
-      │
-      ▼
-Backend Development
-      │
-      ▼
-Frontend Development
-      │
-      ▼
-API Integration
-      │
-      ▼
-Testing
-      │
-      ▼
-Bug Fixes
-      │
-      ▼
-Deployment
-      │
-      ▼
-Production
+    C -.-> D
+    D -.-> G
+    D -.-> H
+    D -.-> I
 ```
 
 ---
 
-# 5. Phase 1 – Project Setup
+## Proposed Changes
 
-Objectives
+### Phase 1: Project Scaffolding & Configuration
 
-• Create GitHub repository
-
-• Configure project structure
-
-• Initialize frontend
-
-• Initialize backend
-
-• Connect Supabase
-
-Deliverables
-
-• Repository created
-
-• React application initialized
-
-• Express server initialized
-
-• Supabase project configured
-
-• Environment variables configured
+Set up both frontend and backend projects with proper folder structure, dependencies, linting, and environment configuration.
 
 ---
 
-# 6. Phase 2 – UI/UX Design
+#### [NEW] Frontend Project Root
 
-Objectives
+##### [NEW] [package.json](file:///c:/Users/Mayan/Projects/CareerLens/client/package.json)
+React + Vite project with dependencies:
+- `react`, `react-dom`, `react-router-dom`
+- `@supabase/supabase-js`
+- `tailwindcss` (v4)
+- `recharts` (charts)
+- `react-hook-form` (forms)
+- `lucide-react` (icons)
+- `axios` (HTTP client)
+- `react-hot-toast` (notifications)
+- `framer-motion` (animations)
+- `html2pdf.js` (resume export)
+- `date-fns` (date utilities)
 
-Design all screens using Google Stitch.
+##### [NEW] [vite.config.js](file:///c:/Users/Mayan/Projects/CareerLens/client/vite.config.js)
+Vite configuration with React plugin, path aliases (`@/` → `src/`), proxy for dev API.
 
-Pages
+##### [NEW] [tailwind.config.js](file:///c:/Users/Mayan/Projects/CareerLens/client/tailwind.config.js)
+Tailwind configuration matching the Stitch design system:
+- Custom colors: `navy` (#0B132B), `navy-light` (#1C2541), `slate-blue` (#3A506B), `teal` (#5BC0BE), `mint` (#6FFFE9)
+- Custom fonts: `geist` (headlines), `inter` (body)
+- Custom spacing, border radius, typography scales
+- Dark mode as default
 
-Landing Page
-
-Login
-
-Register
-
-Forgot Password
-
-Dashboard
-
-Career Assessment
-
-AI Recommendations
-
-Skill Gap Analysis
-
-Learning Roadmap
-
-Learning Resources
-
-Projects
-
-Resume Builder
-
-Interview Preparation
-
-Progress Tracker
-
-Achievements
-
-Career Insights
-
-Settings
-
-Deliverables
-
-• Design system
-
-• High-fidelity screens
-
-• Responsive layouts
-
-• Design approval
+##### [NEW] [.env.example](file:///c:/Users/Mayan/Projects/CareerLens/client/.env.example)
+Environment variable template for `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_API_URL`.
 
 ---
 
-# 7. Phase 3 – Database Development
-
-Objectives
-
-Create database schema in Supabase.
-
-Tasks
-
-Create tables
-
-Create relationships
-
-Enable Row Level Security
-
-Configure Storage buckets
-
-Seed master data
-
-Deliverables
-
-Fully functional database
-
----
-
-# 8. Phase 4 – Backend Development
-
-Modules
-
-Authentication
-
-Profile Management
-
-Career Assessment
-
-Career Recommendation
-
-Skills
-
-Roadmaps
-
-Learning Resources
-
-Projects
-
-Resume Builder
-
-Interview Preparation
-
-Notifications
-
-Analytics
-
-Deliverables
-
-REST API
-
-Validation
-
-Authentication
-
-Authorization
-
-Business logic
+##### Frontend Folder Structure
+```
+client/src/
+├── assets/              # Static assets, images
+├── components/
+│   ├── common/          # Button, Card, Input, Modal, Badge, Loader, Toast
+│   ├── charts/          # ProgressRing, SkillRadar, LineChart, BarChart
+│   ├── forms/           # FormInput, FormSelect, FormTextarea
+│   └── layout/          # Sidebar, TopNav, DashboardLayout, AuthLayout
+├── contexts/            # AuthContext, ThemeContext, NotificationContext
+├── hooks/               # useAuth, useApi, useDebounce, useLocalStorage
+├── lib/                 # supabase.js, api.js (axios instance)
+├── pages/
+│   ├── public/          # Landing, Login, Register, ForgotPassword, NotFound
+│   └── dashboard/       # Dashboard, Assessment, Recommendations, Skills, etc.
+├── services/            # API service modules (auth, profile, assessment, etc.)
+├── utils/               # helpers, constants, validators
+├── App.jsx
+├── index.css
+└── main.jsx
+```
 
 ---
 
-# 9. Phase 5 – Frontend Development
+#### [NEW] Backend Project Root
 
-Objectives
+##### [NEW] [package.json](file:///c:/Users/Mayan/Projects/CareerLens/server/package.json)
+Node.js + Express project with dependencies:
+- `express`, `cors`, `helmet`, `morgan`
+- `@supabase/supabase-js`
+- `zod` (validation)
+- `dotenv`
+- `express-rate-limit`
+- `compression`
 
-Convert approved UI into React components.
+##### [NEW] [.env.example](file:///c:/Users/Mayan/Projects/CareerLens/server/.env.example)
+Environment template: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY`, `PORT`, `NODE_ENV`, `CORS_ORIGIN`.
 
-Tasks
-
-Create reusable components
-
-Build layouts
-
-Connect routing
-
-State management
-
-Responsive implementation
-
-Deliverables
-
-Fully functional frontend
-
----
-
-# 10. Phase 6 – API Integration
-
-Objectives
-
-Integrate frontend with backend.
-
-Tasks
-
-Authentication
-
-Dashboard
-
-Career Assessment
-
-Recommendations
-
-Roadmaps
-
-Projects
-
-Resume Builder
-
-Progress
-
-Notifications
-
-Deliverables
-
-End-to-end functionality
+##### Backend Folder Structure
+```
+server/
+├── src/
+│   ├── config/          # supabase.js, env.js
+│   ├── middleware/      # auth.js, validate.js, errorHandler.js, rateLimiter.js
+│   ├── routes/          # auth, profile, assessment, recommendation, skills,
+│   │                    # roadmap, resources, projects, resume, interview,
+│   │                    # progress, notifications, insights, settings
+│   ├── controllers/     # One per route module
+│   ├── services/        # Business logic layer
+│   ├── validators/      # Zod schemas
+│   ├── utils/           # helpers, constants, logger
+│   └── app.js           # Express app setup
+├── index.js             # Server entry point
+└── package.json
+```
 
 ---
 
-# 11. Phase 7 – Testing
+### Phase 2: Database Schema (Supabase)
 
-Testing Types
-
-Unit Testing
-
-Integration Testing
-
-System Testing
-
-Responsive Testing
-
-Performance Testing
-
-Security Testing
-
-Manual Testing
-
-Acceptance Testing
-
-Deliverables
-
-Bug-free release candidate
+Create all 20 tables with relationships, indexes, RLS policies, and seed data.
 
 ---
 
-# 12. Phase 8 – Deployment
+#### [NEW] [schema.sql](file:///c:/Users/Mayan/Projects/CareerLens/database/schema.sql)
 
-Frontend
+Complete Supabase schema with all tables from the Backend Architecture document:
 
-Deploy to Vercel
+| # | Table | Purpose |
+|---|-------|---------|
+| 1 | `profiles` | User profile data (linked to auth.users) |
+| 2 | `career_assessments` | Assessment responses & scores |
+| 3 | `career_recommendations` | AI-generated career recommendations |
+| 4 | `skills_master` | Master skill repository (seed data) |
+| 5 | `user_skills` | User-skill proficiency tracking |
+| 6 | `career_skill_mapping` | Career → required skills mapping (seed data) |
+| 7 | `learning_roadmaps` | User roadmaps |
+| 8 | `roadmap_steps` | Individual roadmap steps/weeks |
+| 9 | `learning_resources` | Curated learning resources (seed data) |
+| 10 | `projects` | Recommended projects (seed data) |
+| 11 | `user_projects` | User project progress |
+| 12 | `resume_builder` | Resume data (JSON columns for sections) |
+| 13 | `interview_questions` | Interview question bank (seed data) |
+| 14 | `user_interview_progress` | User interview attempt tracking |
+| 15 | `achievements` | Achievement definitions (seed data) |
+| 16 | `user_achievements` | Earned achievements |
+| 17 | `notifications` | User notifications |
+| 18 | `learning_progress` | Aggregated progress metrics |
+| 19 | `career_insights` | Career market data (seed data) |
+| 20 | `activity_logs` | User activity audit trail |
 
-Backend
+#### [NEW] [rls_policies.sql](file:///c:/Users/Mayan/Projects/CareerLens/database/rls_policies.sql)
+Row Level Security policies:
+- User tables: SELECT/INSERT/UPDATE/DELETE restricted to `auth.uid() = user_id`
+- Public reference tables (skills_master, career_insights, learning_resources, interview_questions, projects, achievements): SELECT for all authenticated users
+- Storage policies for avatars, resume-pdfs, project-images, etc.
 
-Deploy to chosen hosting platform
+#### [NEW] [seed.sql](file:///c:/Users/Mayan/Projects/CareerLens/database/seed.sql)
+Seed data for lookup tables:
+- 40+ skills in `skills_master` (HTML, CSS, JS, Python, React, Node, ML, SQL, Git, Docker, AWS, etc.)
+- 15+ careers in `career_insights` (Software Engineer, Data Scientist, UI/UX Designer, DevOps Engineer, etc.)
+- Career-to-skill mappings in `career_skill_mapping`
+- 50+ interview questions across categories
+- 10+ achievements
+- 30+ learning resources
+- 15+ recommended projects
 
-Database
-
-Supabase Cloud
-
-Tasks
-
-Environment configuration
-
-SSL verification
-
-Domain configuration (if applicable)
-
-Deployment validation
-
----
-
-# 13. Feature Implementation Order
-
-Priority 1 (Core)
-
-• Authentication
-
-• User Profile
-
-• Dashboard
-
-Priority 2
-
-• Career Assessment
-
-• AI Recommendations
-
-Priority 3
-
-• Skill Gap Analysis
-
-• Learning Roadmaps
-
-Priority 4
-
-• Learning Resources
-
-• Projects
-
-Priority 5
-
-• Resume Builder
-
-Priority 6
-
-• Interview Preparation
-
-• Progress Tracker
-
-Priority 7
-
-• Notifications
-
-• Achievements
-
-• Career Insights
+#### [NEW] [storage.sql](file:///c:/Users/Mayan/Projects/CareerLens/database/storage.sql)
+Storage bucket creation: `avatars`, `resume-pdfs`, `project-images`, `course-certificates`, `documents`
 
 ---
 
-# 14. Milestones
+### Phase 3: Backend API Development
 
-Milestone 1
-
-Project Setup Complete
-
-Milestone 2
-
-UI/UX Approved
-
-Milestone 3
-
-Database Ready
-
-Milestone 4
-
-Backend Complete
-
-Milestone 5
-
-Frontend Complete
-
-Milestone 6
-
-API Integration Complete
-
-Milestone 7
-
-Testing Complete
-
-Milestone 8
-
-Production Deployment
+Complete REST API with authentication, validation, and error handling for all modules.
 
 ---
 
-# 15. Deliverables
+#### Backend Core
 
-Documentation
+##### [NEW] [app.js](file:///c:/Users/Mayan/Projects/CareerLens/server/src/app.js)
+Express application with CORS, Helmet, Morgan, compression, rate limiting, JSON parsing, route mounting, centralized error handler.
 
-• PRD
+##### [NEW] [auth.js (middleware)](file:///c:/Users/Mayan/Projects/CareerLens/server/src/middleware/auth.js)
+JWT verification using Supabase `getUser()` — extracts user from Authorization header, attaches to `req.user`.
 
-• TRD
+##### [NEW] [errorHandler.js](file:///c:/Users/Mayan/Projects/CareerLens/server/src/middleware/errorHandler.js)
+Centralized error handling with consistent JSON response format: `{ success, message, data, error }`.
 
-• UI/UX Brief
-
-• App Flow
-
-• Backend Architecture
-
-Application
-
-• Responsive web application
-
-• Backend API
-
-• Database
-
-• Authentication
-
-Deployment
-
-• Live frontend
-
-• Live backend
-
-• Cloud database
+##### [NEW] [validate.js](file:///c:/Users/Mayan/Projects/CareerLens/server/src/middleware/validate.js)
+Zod validation middleware — validates `req.body`, `req.params`, `req.query` against Zod schemas.
 
 ---
 
-# 16. Risk Management
+#### API Routes (13 route modules)
 
-Potential Risks
+| Route File | Base Path | Endpoints |
+|-----------|-----------|-----------|
+| `auth.routes.js` | `/api/auth` | POST `/register`, POST `/login`, POST `/logout`, POST `/forgot-password`, POST `/reset-password` |
+| `profile.routes.js` | `/api/profile` | GET `/`, PUT `/`, POST `/avatar` |
+| `assessment.routes.js` | `/api/assessment` | POST `/`, GET `/`, GET `/history` |
+| `recommendation.routes.js` | `/api/recommendations` | GET `/`, GET `/:id`, POST `/generate` |
+| `skills.routes.js` | `/api/skills` | GET `/`, GET `/user`, POST `/user`, PUT `/user/:id`, DELETE `/user/:id` |
+| `roadmap.routes.js` | `/api/roadmap` | GET `/`, POST `/`, PUT `/steps/:id`, GET `/:id` |
+| `resources.routes.js` | `/api/resources` | GET `/`, GET `/:id`, GET `/categories` |
+| `projects.routes.js` | `/api/projects` | GET `/`, GET `/:id`, POST `/user`, PUT `/user/:id`, GET `/user` |
+| `resume.routes.js` | `/api/resume` | GET `/`, POST `/`, PUT `/:id`, DELETE `/:id` |
+| `interview.routes.js` | `/api/interview` | GET `/questions`, POST `/submit`, GET `/progress`, GET `/categories` |
+| `progress.routes.js` | `/api/progress` | GET `/`, GET `/dashboard`, PUT `/goals` |
+| `notifications.routes.js` | `/api/notifications` | GET `/`, PUT `/read`, PUT `/read-all`, DELETE `/:id` |
+| `insights.routes.js` | `/api/insights` | GET `/`, GET `/:id`, GET `/trending` |
 
-API integration delays
-
-Database migration issues
-
-Scope expansion
-
-Third-party service limitations
-
-Performance bottlenecks
-
-Mitigation
-
-Incremental development
-
-Frequent testing
-
-Version control
-
-Modular architecture
-
-Regular backups
+Each route module has a corresponding **controller** and **service** file.
 
 ---
 
-# 17. Quality Assurance Checklist
+#### AI Recommendation Service
 
-✓ Coding standards followed
-
-✓ Responsive UI
-
-✓ Secure authentication
-
-✓ API validation
-
-✓ Database integrity
-
-✓ Error handling
-
-✓ Performance optimization
-
-✓ Accessibility checks
-
-✓ Cross-browser compatibility
-
-✓ Documentation updated
+##### [NEW] [recommendationService.js](file:///c:/Users/Mayan/Projects/CareerLens/server/src/services/recommendationService.js)
+Rule-based career recommendation engine:
+1. Takes assessment scores (interest, aptitude, personality, technical, communication, leadership, creativity)
+2. Compares against `career_skill_mapping` weighted priorities
+3. Generates match percentages for each career
+4. Returns top 5-10 career recommendations with match %, salary range, growth rate, difficulty
+5. Generates personalized roadmap for selected career
 
 ---
 
-# 18. Success Criteria
+### Phase 4: Frontend Foundation
 
-The implementation is considered successful when:
-
-• Users can register and log in securely.
-
-• Career assessments generate recommendations.
-
-• Skill gap analysis functions correctly.
-
-• Personalized learning roadmaps are displayed.
-
-• Users can access learning resources and projects.
-
-• Resume Builder generates downloadable resumes.
-
-• Interview Preparation module is operational.
-
-• Dashboard accurately reflects user progress.
-
-• Application is responsive across supported devices.
-
-• The application is deployed and stable.
+Core layout, design system, routing, auth flows, and reusable component library.
 
 ---
 
-# 19. Post-Deployment Activities
+#### Design System & Global Styles
 
-Monitor application performance.
-
-Track user feedback.
-
-Fix production issues.
-
-Optimize database queries.
-
-Enhance UI based on usability feedback.
-
-Plan Version 2 features.
+##### [NEW] [index.css](file:///c:/Users/Mayan/Projects/CareerLens/client/src/index.css)
+Global styles with Tailwind directives, custom CSS variables matching Stitch design:
+- CSS custom properties for all design tokens
+- Geist + Inter font imports
+- Scrollbar styling
+- Focus states
+- Smooth transitions
+- Animation keyframes
 
 ---
 
-# 20. Future Roadmap (Version 2)
+#### Reusable Component Library
 
-• AI Career Chat Assistant
+##### Common Components (14 components)
+| Component | File | Description |
+|-----------|------|-------------|
+| `Button` | `components/common/Button.jsx` | Primary, secondary, ghost, danger, success variants |
+| `Card` | `components/common/Card.jsx` | Elevated card with hover glow effect, 1px border |
+| `Input` | `components/common/Input.jsx` | Styled input with label, error state, focus glow |
+| `Select` | `components/common/Select.jsx` | Dropdown with search capability |
+| `Modal` | `components/common/Modal.jsx` | Overlay modal with backdrop blur |
+| `Badge` | `components/common/Badge.jsx` | Status badges, skill chips |
+| `Loader` | `components/common/Loader.jsx` | Skeleton loaders and spinners |
+| `Toast` | `components/common/Toast.jsx` | Success/error/info notifications |
+| `EmptyState` | `components/common/EmptyState.jsx` | Friendly empty state with illustration |
+| `ProgressBar` | `components/common/ProgressBar.jsx` | Horizontal progress with teal gradient |
+| `Table` | `components/common/Table.jsx` | Data table with sorting, pagination |
+| `Tabs` | `components/common/Tabs.jsx` | Tab navigation (underline and pill variants) |
+| `Avatar` | `components/common/Avatar.jsx` | User avatar with fallback initials |
+| `SearchBar` | `components/common/SearchBar.jsx` | Search input with debounce |
 
-• Mentor Marketplace
+##### Chart Components (5 components)
+| Component | File | Description |
+|-----------|------|-------------|
+| `ProgressRing` | `components/charts/ProgressRing.jsx` | Circular SVG progress (#6FFFE9 accent) |
+| `SkillRadar` | `components/charts/SkillRadar.jsx` | Radar chart for skill visualization |
+| `TrendLine` | `components/charts/TrendLine.jsx` | Line chart for progress over time |
+| `BarChart` | `components/charts/BarChart.jsx` | Bar chart for score comparisons |
+| `DonutChart` | `components/charts/DonutChart.jsx` | Donut chart for distribution data |
 
-• Internship Portal
-
-• Job Recommendations
-
-• Company Preparation Hub
-
-• Coding Challenges
-
-• Community Forum
-
-• Scholarships
-
-• Event Management
-
-• Mobile Application
-
-• Multi-language Support
-
-• Advanced Analytics Dashboard
+##### Layout Components (4 components)
+| Component | File | Description |
+|-----------|------|-------------|
+| `Sidebar` | `components/layout/Sidebar.jsx` | Fixed 280px sidebar with nav items, collapsible, #1C2541 bg |
+| `TopNav` | `components/layout/TopNav.jsx` | 72px top bar with search, notifications, profile |
+| `DashboardLayout` | `components/layout/DashboardLayout.jsx` | Sidebar + TopNav + main content wrapper |
+| `AuthLayout` | `components/layout/AuthLayout.jsx` | Centered auth form layout |
 
 ---
 
-# 21. Conclusion
+#### Routing & Auth
 
-This implementation plan provides a structured roadmap for developing CareerLens from project initialization to production deployment. By following a phased, modular approach, the development team can ensure maintainability, scalability, and high software quality while delivering an intuitive and reliable platform for career guidance.
+##### [NEW] [App.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/App.jsx)
+React Router v6 with:
+- Public routes: `/`, `/login`, `/register`, `/forgot-password`, `/reset-password`
+- Protected routes (wrapped in `DashboardLayout`): `/dashboard`, `/assessment`, `/recommendations`, `/skills`, `/roadmap`, `/resources`, `/projects`, `/resume`, `/interview`, `/progress`, `/achievements`, `/insights`, `/settings`, `/profile`, `/notifications`
+- `ProtectedRoute` component checking auth state
+- 404 catch-all route
 
-The project emphasizes clean architecture, responsive design, secure authentication, and user-centric functionality to create a professional, production-ready application.
+##### [NEW] [AuthContext.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/contexts/AuthContext.jsx)
+Auth context with Supabase Auth:
+- `signUp`, `signIn`, `signOut`, `resetPassword`
+- `onAuthStateChange` listener
+- Session persistence
+- Loading state
 
 ---
 
-# End of Implementation Plan
+### Phase 5: Public & Auth Pages
+
+Landing page, login, register, forgot password — the first screens users see.
+
+---
+
+##### [NEW] [LandingPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/public/LandingPage.jsx)
+Based on Stitch "Landing Page - CareerLens AI" screen:
+- Hero section with animated headline, CTA buttons
+- Features grid showcasing platform capabilities
+- How It Works steps
+- Testimonials / social proof
+- Statistics section
+- Footer with links
+
+##### [NEW] [LoginPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/public/LoginPage.jsx)
+Auth form with email/password, "Forgot Password" link, register link. Supabase Auth integration.
+
+##### [NEW] [RegisterPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/public/RegisterPage.jsx)
+Registration with full_name, email, password, confirm password. Creates auth user + profile row.
+
+##### [NEW] [ForgotPasswordPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/public/ForgotPasswordPage.jsx)
+Email input → sends reset link via Supabase Auth.
+
+##### [NEW] [NotFoundPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/public/NotFoundPage.jsx)
+Friendly 404 page with illustration and navigation back.
+
+---
+
+### Phase 6: Dashboard & Core Feature Pages
+
+The main application experience — all 14 authenticated pages.
+
+---
+
+##### [NEW] [DashboardPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/DashboardPage.jsx)
+Based on Stitch "Dashboard - CareerLens AI" screen:
+- Welcome card with user name and motivational message
+- Learning progress ring (overall completion)
+- Career recommendation summary card
+- Skill progress horizontal bars
+- Learning streak counter
+- Resume completion percentage
+- Recent activity feed
+- Upcoming tasks / next steps
+- Weekly goals progress
+- Quick action buttons
+- Recommended courses carousel
+
+##### [NEW] [AssessmentPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/AssessmentPage.jsx)
+Multi-step career assessment questionnaire:
+- Interest questions (10 questions)
+- Aptitude questions (10 questions)
+- Personality questions (10 questions)
+- Technical skills self-assessment
+- Communication & leadership questions
+- Step progress indicator
+- Animated transitions between steps
+- Results summary with score visualization
+
+##### [NEW] [RecommendationsPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/RecommendationsPage.jsx)
+Based on Stitch "Role Matching" and "AI Career Recommendations" screens:
+- Top matched careers with match percentage rings
+- Career cards with salary range, growth rate, difficulty badge
+- Detailed career view with required skills, roadmap preview
+- "Explore This Career" action to generate roadmap
+
+##### [NEW] [SkillGapPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/SkillGapPage.jsx)
+- Radar chart showing current skills vs required skills
+- Gap analysis table with skill name, current level, required level, gap
+- Skill progress tracking with editable proficiency
+- Recommended resources per skill gap
+
+##### [NEW] [RoadmapPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/RoadmapPage.jsx)
+Based on Stitch "Learning Roadmap" screen:
+- Vertical timeline with connected nodes
+- Week-by-week learning plan
+- Step status (completed ✅, in-progress 🔄, upcoming ⏳)
+- Expandable step details with resources
+- Overall completion percentage
+
+##### [NEW] [ResourcesPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/ResourcesPage.jsx)
+- Filterable grid of learning resources
+- Category tabs (Frontend, Backend, Data Science, DevOps, etc.)
+- Difficulty filter (Beginner, Intermediate, Advanced)
+- Resource type filter (Video, Article, Course, Book)
+- Resource cards with provider, duration, rating
+
+##### [NEW] [ProjectsPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/ProjectsPage.jsx)
+- Recommended projects based on career path
+- Project cards with tech stack chips, difficulty, duration
+- Start/track project functionality
+- GitHub URL and live demo links
+- Completion tracking
+
+##### [NEW] [ResumePage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/ResumePage.jsx)
+- Multi-section resume builder (Education, Experience, Skills, Projects, Certifications, Languages)
+- Template selection
+- Live preview panel
+- PDF export functionality
+- ATS-friendly format
+
+##### [NEW] [InterviewPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/InterviewPage.jsx)
+- Category-based question browsing (Technical, Behavioral, HR, Domain-specific)
+- Difficulty levels
+- Practice mode with reveal answer
+- Progress tracking (attempted, correct)
+- Score summary
+
+##### [NEW] [ProgressPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/ProgressPage.jsx)
+- Line chart showing learning hours over time
+- Skills completed counter
+- Projects completed counter
+- Roadmap progress percentage
+- Weekly/monthly goal tracking with edit capability
+- Activity calendar heatmap
+
+##### [NEW] [AchievementsPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/AchievementsPage.jsx)
+- Achievement badge grid
+- Earned vs locked achievements
+- Points system
+- Recent achievements
+- Animated badge unlock
+
+##### [NEW] [InsightsPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/InsightsPage.jsx)
+- Career market data cards
+- Salary ranges bar chart
+- Industry growth trends line chart
+- Demand indicators
+- Career comparison tool
+
+##### [NEW] [SettingsPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/SettingsPage.jsx)
+- Profile editing (name, bio, college, degree, links)
+- Avatar upload
+- Password change
+- Notification preferences
+- Theme toggle (dark/light) if implemented
+- Account deletion option
+
+##### [NEW] [NotificationsPage.jsx](file:///c:/Users/Mayan/Projects/CareerLens/client/src/pages/dashboard/NotificationsPage.jsx)
+- Notification list with type icons
+- Read/unread status
+- Mark all as read
+- Delete individual notifications
+- Notification categories (system, achievement, reminder)
+
+---
+
+### Phase 7: API Integration & State Management
+
+Connect all frontend pages to backend APIs with proper loading, error, and empty states.
+
+---
+
+#### Service Layer (13 service modules)
+Each service module wraps API calls with the Axios instance:
+
+| Service | File | Responsibilities |
+|---------|------|-----------------|
+| `authService` | `services/authService.js` | Login, register, logout, password reset |
+| `profileService` | `services/profileService.js` | Get/update profile, avatar upload |
+| `assessmentService` | `services/assessmentService.js` | Submit assessment, get results, history |
+| `recommendationService` | `services/recommendationService.js` | Get recommendations, career details |
+| `skillService` | `services/skillService.js` | Master skills, user skills CRUD |
+| `roadmapService` | `services/roadmapService.js` | Get/create roadmap, update steps |
+| `resourceService` | `services/resourceService.js` | Get resources, filter, categories |
+| `projectService` | `services/projectService.js` | Get projects, track user projects |
+| `resumeService` | `services/resumeService.js` | Resume CRUD, PDF generation |
+| `interviewService` | `services/interviewService.js` | Questions, submit answers, progress |
+| `progressService` | `services/progressService.js` | Dashboard stats, goals |
+| `notificationService` | `services/notificationService.js` | Get/mark-read/delete notifications |
+| `insightService` | `services/insightService.js` | Career insights, trends |
+
+#### Contexts
+| Context | File | Purpose |
+|---------|------|---------|
+| `AuthContext` | `contexts/AuthContext.jsx` | User session, auth methods |
+| `NotificationContext` | `contexts/NotificationContext.jsx` | Unread count, real-time updates |
+| `ThemeContext` | `contexts/ThemeContext.jsx` | Dark/light theme toggle |
+
+---
+
+### Phase 8: Polish, Performance & Deployment
+
+Final optimizations, animations, accessibility, and deployment configuration.
+
+---
+
+#### Performance
+- Lazy load all dashboard page components with `React.lazy()` + `Suspense`
+- Code splitting per route
+- Image optimization
+- API response caching in service layer
+- Debounced search inputs
+
+#### Animations (Framer Motion)
+- Page transitions (fade in/out, 200ms)
+- Sidebar collapse/expand
+- Card hover glow effects
+- Button press micro-animations
+- Loading skeleton shimmer
+- Modal entrance/exit
+- Progress bar fill animations
+- Achievement badge unlock celebration
+
+#### Accessibility
+- Semantic HTML throughout
+- ARIA labels on interactive elements
+- Keyboard navigation (Tab, Enter, Escape)
+- Visible focus rings (#5BC0BE glow)
+- Color contrast ≥ 4.5:1
+- Screen reader compatible form labels
+
+#### Configuration Files
+| File | Purpose |
+|------|---------|
+| `client/.env.example` | Frontend env template |
+| `server/.env.example` | Backend env template |
+| `client/vercel.json` | Vercel deployment config with SPA rewrite |
+| `.gitignore` | Root gitignore for both projects |
+| `README.md` | Complete project documentation with setup instructions |
+
+---
+
+## File Count Summary
+
+| Category | Approximate Files |
+|----------|------------------|
+| Frontend Components (common) | 14 |
+| Frontend Components (charts) | 5 |
+| Frontend Components (layout) | 4 |
+| Frontend Components (forms) | 3 |
+| Frontend Pages | 19 |
+| Frontend Services | 13 |
+| Frontend Contexts | 3 |
+| Frontend Hooks | 4 |
+| Frontend Utilities | 3 |
+| Frontend Config | 5 |
+| Backend Routes | 13 |
+| Backend Controllers | 13 |
+| Backend Services | 13 |
+| Backend Validators | 13 |
+| Backend Middleware | 4 |
+| Backend Config | 3 |
+| Database Scripts | 4 |
+| **Total** | **~150 files** |
+
+---
+
+## Verification Plan
+
+### Automated Tests
+```bash
+# Frontend build check
+cd client && npm run build
+
+# Backend start check  
+cd server && npm start
+
+# Lint check
+cd client && npx eslint src/
+```
+
+### Manual Verification
+- Navigate all sidebar routes — confirm no dead links
+- Complete registration → login → assessment → recommendations flow
+- Verify all API endpoints return proper JSON responses
+- Test responsive layout at 1440px, 1024px, 768px, 375px
+- Verify Supabase RLS policies block cross-user access
+- Test form validation on all forms
+- Verify loading states and empty states on all pages
+- Check all charts render with sample data
+- Test resume PDF download
+- Verify notification mark-as-read functionality
+- Confirm all animations are smooth (150-250ms)
+- Verify keyboard navigation on critical flows
+
+---
+
+## Execution Order
+
+Given the massive scope, I will build in this order to ensure each phase produces a working, testable artifact:
+
+1. **Scaffold both projects** (frontend + backend) — ~10 min
+2. **Database schema + seed data** — ~15 min
+3. **Backend API** (all 13 route modules) — ~30 min
+4. **Frontend design system + components** — ~20 min
+5. **Layout + routing + auth** — ~15 min
+6. **All 19 pages** — ~60 min
+7. **API integration + state** — ~20 min
+8. **Polish + animations + a11y** — ~15 min
+9. **Verify + fix** — ~10 min
+
+I recommend using the `/goal` command for this task since it's extensive and should run without interruption.

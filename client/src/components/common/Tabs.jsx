@@ -6,7 +6,8 @@ const Tabs = ({
   defaultTab, 
   onChange, 
   variant = 'underline', // 'underline' | 'pill'
-  className = '' 
+  className = '',
+  layoutIdPrefix = 'tabs'
 }) => {
   const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);
 
@@ -23,21 +24,21 @@ const Tabs = ({
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
             className={`
-              px-4 py-2 rounded-full text-sm font-medium transition-colors relative
-              ${activeTab === tab.id ? 'text-[#0B132B]' : 'text-[#BDC9C8] hover:text-[#DBE1FF] bg-[#1C2541] hover:bg-[#212942] border border-[#3A506B]'}
+              px-4 py-2 rounded-full text-label-sm font-semibold transition-all relative outline-none
+              ${activeTab === tab.id ? 'text-on-primary' : 'text-on-surface-variant hover:text-on-surface bg-surface-container-low hover:bg-surface-variant/40 border border-outline-variant/10'}
             `}
           >
             {activeTab === tab.id && (
               <motion.div
-                layoutId={`pill-${Math.random()}`} // Note: In production, pass a stable layoutId prefix as a prop
-                className="absolute inset-0 bg-[#5BC0BE] rounded-full"
+                layoutId={`${layoutIdPrefix}-pill-active`}
+                className="absolute inset-0 bg-primary rounded-full"
                 initial={false}
-                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                 style={{ zIndex: -1 }}
               />
             )}
             <span className="relative z-10 flex items-center">
-              {tab.icon && <tab.icon className="w-4 h-4 mr-2" />}
+              {tab.icon && <tab.icon className="w-4 h-4 mr-1.5 shrink-0" />}
               {tab.label}
             </span>
           </button>
@@ -48,26 +49,26 @@ const Tabs = ({
 
   // Default underline variant
   return (
-    <div className={`border-b border-[#3A506B] flex overflow-x-auto no-scrollbar ${className}`}>
+    <div className={`border-b border-outline-variant/10 flex overflow-x-auto no-scrollbar ${className}`}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => handleTabClick(tab.id)}
           className={`
-            px-6 py-4 text-sm font-medium relative whitespace-nowrap
-            ${activeTab === tab.id ? 'text-[#5BC0BE]' : 'text-[#BDC9C8] hover:text-[#DBE1FF] hover:bg-[#1C2541]/50'}
+            px-5 py-3 text-label-md font-semibold relative whitespace-nowrap outline-none transition-colors
+            ${activeTab === tab.id ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/20'}
           `}
         >
           <span className="flex items-center">
-            {tab.icon && <tab.icon className="w-4 h-4 mr-2" />}
+            {tab.icon && <tab.icon className="w-4 h-4 mr-1.5 shrink-0" />}
             {tab.label}
           </span>
           {activeTab === tab.id && (
             <motion.div
-              layoutId={`underline-${Math.random()}`}
-              className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#5BC0BE]"
+              layoutId={`${layoutIdPrefix}-underline-active`}
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
               initial={false}
-              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
             />
           )}
         </button>

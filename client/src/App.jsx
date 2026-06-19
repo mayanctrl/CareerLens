@@ -17,17 +17,20 @@ const DashboardLayout = React.lazy(() => import('./components/layout/DashboardLa
 const DashboardPage = React.lazy(() => import('./pages/dashboard/DashboardPage'));
 const AssessmentPage = React.lazy(() => import('./pages/dashboard/AssessmentPage'));
 const RecommendationsPage = React.lazy(() => import('./pages/dashboard/RecommendationsPage'));
+const SkillsPage = React.lazy(() => import('./pages/dashboard/SkillsPage'));
 const RoadmapPage = React.lazy(() => import('./pages/dashboard/RoadmapPage'));
+const ResourcesPage = React.lazy(() => import('./pages/dashboard/ResourcesPage'));
 const ProjectsPage = React.lazy(() => import('./pages/dashboard/ProjectsPage'));
-// Stubs for other pages
-const PlaceholderPage = ({ title }) => (
-  <div className="flex items-center justify-center h-full min-h-[60vh]">
-    <div className="text-center">
-      <h1 className="text-3xl font-bold text-white mb-4">{title}</h1>
-      <p className="text-[#BDC9C8]">This page is under construction.</p>
-    </div>
-  </div>
-);
+const ProjectDetailPage = React.lazy(() => import('./pages/dashboard/ProjectDetailPage'));
+const ResumePage = React.lazy(() => import('./pages/dashboard/ResumePage'));
+const InterviewPage = React.lazy(() => import('./pages/dashboard/InterviewPage'));
+const ProgressPage = React.lazy(() => import('./pages/dashboard/ProgressPage'));
+const AchievementsPage = React.lazy(() => import('./pages/dashboard/AchievementsPage'));
+const InsightsPage = React.lazy(() => import('./pages/dashboard/InsightsPage'));
+const SettingsPage = React.lazy(() => import('./pages/dashboard/SettingsPage'));
+const HelpPage = React.lazy(() => import('./pages/dashboard/HelpPage'));
+const NotificationsPage = React.lazy(() => import('./pages/dashboard/NotificationsPage'));
+const ProfilePage = React.lazy(() => import('./pages/dashboard/ProfilePage'));
 
 // Auth Guard Component
 const ProtectedRoute = () => {
@@ -69,18 +72,20 @@ const AppRoutes = () => {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/assessment" element={<AssessmentPage />} />
             <Route path="/recommendations" element={<RecommendationsPage />} />
-            <Route path="/skills" element={<PlaceholderPage title="Skill Gap Analysis" />} />
+            <Route path="/skills" element={<SkillsPage />} />
             <Route path="/roadmap" element={<RoadmapPage />} />
-            <Route path="/resources" element={<PlaceholderPage title="Learning Resources" />} />
+            <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/resume" element={<PlaceholderPage title="Resume Builder" />} />
-            <Route path="/interview" element={<PlaceholderPage title="Interview Prep" />} />
-            <Route path="/progress" element={<PlaceholderPage title="Progress Tracker" />} />
-            <Route path="/achievements" element={<PlaceholderPage title="Achievements" />} />
-            <Route path="/insights" element={<PlaceholderPage title="Career Insights" />} />
-            <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
-            <Route path="/notifications" element={<PlaceholderPage title="Notifications" />} />
-            <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
+            <Route path="/projects/:id" element={<ProjectDetailPage />} />
+            <Route path="/resume" element={<ResumePage />} />
+            <Route path="/interview" element={<InterviewPage />} />
+            <Route path="/progress" element={<ProgressPage />} />
+            <Route path="/achievements" element={<AchievementsPage />} />
+            <Route path="/insights" element={<InsightsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/notifications" element={<NotificationsPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Route>
         </Route>
 

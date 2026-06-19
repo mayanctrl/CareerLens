@@ -11,29 +11,20 @@ const Loader = ({ size = 'md', className = '', fullScreen = false, text }) => {
 
   const content = (
     <div className={`flex flex-col items-center justify-center ${className}`}>
-      <Loader2 className={`animate-spin text-[#5BC0BE] ${sizes[size]}`} />
-      {text && <p className="mt-4 text-[#BDC9C8] font-medium animate-pulse">{text}</p>}
+      <Loader2 className={`animate-spin text-primary ${sizes[size]}`} />
+      {text && <p className="mt-4 text-on-surface-variant font-label text-label-md animate-pulse">{text}</p>}
     </div>
   );
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0B132B]/80 backdrop-blur-sm">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
         {content}
       </div>
     );
   }
 
   return content;
-};
-
-export const Skeleton = ({ className = '', ...props }) => {
-  return (
-    <div
-      className={`skeleton ${className}`}
-      {...props}
-    />
-  );
 };
 
 export default Loader;

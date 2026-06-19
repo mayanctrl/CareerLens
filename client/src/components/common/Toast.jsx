@@ -7,25 +7,25 @@ export const ToastProvider = () => {
     <Toaster
       position="bottom-right"
       toastOptions={{
-        className: 'glass text-[#DBE1FF]',
+        className: 'glass-panel text-on-surface font-label text-label-md',
         style: {
-          background: 'rgba(28, 37, 65, 0.95)',
+          background: 'rgba(12, 33, 51, 0.95)',
           backdropFilter: 'blur(12px)',
-          border: '1px solid #3A506B',
-          color: '#DBE1FF',
-          padding: '16px',
-          borderRadius: '12px',
+          border: '1px solid rgba(253, 255, 252, 0.08)',
+          color: '#d0e5fc',
+          padding: '14px 18px',
+          borderRadius: '16px',
         },
         success: {
-          icon: <CheckCircle className="text-[#6FFFE9] w-5 h-5" />,
+          icon: <CheckCircle className="text-primary w-5 h-5 shrink-0" />,
           style: {
-            borderLeft: '4px solid #6FFFE9',
+            borderLeft: '4px solid #55e0d2',
           },
         },
         error: {
-          icon: <XCircle className="text-[#FFB4AB] w-5 h-5" />,
+          icon: <XCircle className="text-error w-5 h-5 shrink-0" />,
           style: {
-            borderLeft: '4px solid #EF4444',
+            borderLeft: '4px solid #ffb4ab',
           },
         },
       }}
@@ -37,12 +37,12 @@ export const showToast = {
   success: (message) => toast.success(message),
   error: (message) => toast.error(message),
   info: (message) => toast(message, {
-    icon: <Info className="text-[#5BC0BE] w-5 h-5" />,
-    style: { borderLeft: '4px solid #5BC0BE' }
+    icon: <Info className="text-primary w-5 h-5 shrink-0" />,
+    style: { borderLeft: '4px solid #55e0d2' }
   }),
   warning: (message) => toast(message, {
-    icon: <AlertTriangle className="text-[#F59E0B] w-5 h-5" />,
-    style: { borderLeft: '4px solid #F59E0B' }
+    icon: <AlertTriangle className="text-secondary w-5 h-5 shrink-0" />,
+    style: { borderLeft: '4px solid #ffb86b' }
   }),
 };
 

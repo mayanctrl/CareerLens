@@ -1,61 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, Target, Rocket, Award, Shield, Cpu, Map } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Target, Rocket, Award, Shield, Cpu, Map, Compass } from 'lucide-react';
 import Button from '../../components/common/Button';
+import Card from '../../components/common/Card';
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-[#0B132B] text-[#DBE1FF] font-['Inter']">
+    <div className="min-h-screen bg-background text-on-surface font-body overflow-x-hidden">
       {/* Navigation */}
-      <nav className="container mx-auto px-6 py-6 flex justify-between items-center relative z-10">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5BC0BE] to-[#6FFFE9] flex items-center justify-center">
-            <Compass className="w-6 h-6 text-[#0B132B]" />
+      <nav className="container mx-auto px-6 py-5 flex justify-between items-center relative z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+            <BrainCircuit className="w-5 h-5 text-on-primary-container" />
           </div>
-          <span className="text-2xl font-bold font-['Geist'] text-white tracking-wide">
-            Career<span className="text-[#5BC0BE]">Lens</span>
-          </span>
+          <div>
+            <span className="text-headline-md font-bold text-primary tracking-tight">
+              CareerLens
+            </span>
+            <p className="text-[10px] font-semibold text-on-surface-variant/80 uppercase tracking-widest leading-none">AI Agent</p>
+          </div>
         </div>
-        <div className="hidden md:flex space-x-8 text-sm font-medium text-[#BDC9C8]">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#how-it-works" className="hover:text-white transition-colors">How it Works</a>
-          <a href="#testimonials" className="hover:text-white transition-colors">Success Stories</a>
+        <div className="hidden md:flex space-x-8 text-label-md font-semibold text-on-surface-variant">
+          <a href="#features" className="hover:text-on-surface transition-colors">Features</a>
+          <a href="#how-it-works" className="hover:text-on-surface transition-colors">How it Works</a>
+          <a href="#about" className="hover:text-on-surface transition-colors">About</a>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-3">
           <Link to="/login">
-            <Button variant="ghost">Log In</Button>
+            <Button variant="ghost" size="sm">Log In</Button>
           </Link>
           <Link to="/register">
-            <Button>Get Started</Button>
+            <Button size="sm">Get Started</Button>
           </Link>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <main className="container mx-auto px-6 pt-20 pb-32 text-center relative">
-        {/* Background decorative elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#5BC0BE]/10 rounded-full blur-[120px] pointer-events-none" />
+      <main className="container mx-auto px-6 pt-24 pb-32 text-center relative">
+        {/* Glow Effects */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
         
         <div className="relative z-10 max-w-4xl mx-auto animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C2541] border border-[#3A506B] text-[#6FFFE9] text-xs font-semibold uppercase tracking-wider mb-8">
-            <span className="w-2 h-2 rounded-full bg-[#6FFFE9] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container border border-outline-variant/20 text-primary text-label-sm font-semibold uppercase tracking-wider mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             AI-Powered Career Guidance
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold font-['Geist'] text-white leading-tight mb-8">
-            Navigate Your Career with <br />
-            <span className="gradient-text">Precision Intelligence</span>
+          <h1 className="text-display-lg font-bold text-on-surface mb-8 tracking-tight max-w-3xl mx-auto leading-none">
+            Navigate Your Career with <span className="gradient-text">Precision Intelligence</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-[#BDC9C8] mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto leading-relaxed">
             Stop guessing your next career move. CareerLens analyzes your skills, interests, and industry trends to generate a personalized roadmap to your dream job.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/register">
-              <Button size="lg" icon={ArrowRight} className="w-full sm:w-auto shadow-glow group">
+              <Button size="lg" className="w-full sm:w-auto shadow-glow-teal group">
                 Start Your Assessment
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Button>
             </Link>
             <Link to="/login">
@@ -68,11 +71,11 @@ const LandingPage = () => {
       </main>
 
       {/* Features Section */}
-      <section id="features" className="bg-[#1C2541] py-24 relative overflow-hidden">
+      <section id="features" className="py-24 relative bg-surface-low border-t border-outline-variant/10">
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold font-['Geist'] text-white mb-4">Everything you need to succeed</h2>
-            <p className="text-[#BDC9C8]">A complete ecosystem for your career development.</p>
+            <h2 className="text-headline-lg font-bold text-on-surface mb-4">Everything you need to succeed</h2>
+            <p className="text-body-md text-on-surface-variant">A complete AI-backed ecosystem for your career development.</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -84,28 +87,35 @@ const LandingPage = () => {
               { icon: Shield, title: 'Interview Prep', desc: 'Practice with role-specific questions and get AI feedback on your answers.' },
               { icon: Award, title: 'Progress Tracking', desc: 'Stay motivated with visual progress metrics and achievement badges.' }
             ].map((feature, i) => (
-              <div key={i} className="bg-[#0B132B] p-8 rounded-2xl border border-[#3A506B] hover:border-[#5BC0BE]/50 transition-colors group">
-                <div className="w-12 h-12 rounded-xl bg-[#1C2541] flex items-center justify-center mb-6 group-hover:bg-[#5BC0BE]/10 transition-colors">
-                  <feature.icon className="w-6 h-6 text-[#5BC0BE]" />
+              <Card 
+                key={i} 
+                hoverEffect 
+                className="group"
+                accentBar={i % 3 === 0 ? 'primary' : i % 3 === 1 ? 'secondary' : null}
+              >
+                <div className="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-outline-variant/10">
+                  <feature.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold font-['Geist'] text-white mb-3">{feature.title}</h3>
-                <p className="text-[#BDC9C8] leading-relaxed">{feature.desc}</p>
-              </div>
+                <h3 className="text-headline-sm font-bold text-on-surface mb-3">{feature.title}</h3>
+                <p className="text-body-md text-on-surface-variant leading-relaxed">{feature.desc}</p>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0B132B] border-t border-[#3A506B] py-12">
-        <div className="container mx-auto px-6 text-center text-[#879392]">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <Compass className="w-6 h-6 text-[#5BC0BE]" />
-            <span className="text-xl font-bold font-['Geist'] text-white tracking-wide">
-              Career<span className="text-[#5BC0BE]">Lens</span>
+      <footer className="border-t border-outline-variant/10 py-12 bg-background">
+        <div className="container mx-auto px-6 text-center text-on-surface-variant">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-8 h-8 rounded bg-primary-container flex items-center justify-center">
+              <BrainCircuit className="w-4 h-4 text-on-primary-container" />
+            </div>
+            <span className="text-headline-sm font-bold text-on-surface tracking-tight">
+              CareerLens
             </span>
           </div>
-          <p>© 2026 CareerLens AI. Built with Precision Intelligence.</p>
+          <p className="text-label-sm">© 2026 CareerLens AI. Built with Precision Intelligence.</p>
         </div>
       </footer>
     </div>

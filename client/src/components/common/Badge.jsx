@@ -6,21 +6,22 @@ const Badge = ({
   className = '', 
   ...props 
 }) => {
-  const baseStyles = 'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2';
+  const baseStyles = 'inline-flex items-center rounded-full px-2.5 py-0.5 text-label-sm font-semibold transition-colors border';
   
   const variants = {
-    default: 'bg-[#1C2541] text-[#DBE1FF] border border-[#3A506B]',
-    primary: 'bg-[rgba(91,192,190,0.15)] text-[#5BC0BE] border border-[#5BC0BE]/30',
-    secondary: 'bg-[rgba(111,255,233,0.15)] text-[#6FFFE9] border border-[#6FFFE9]/30',
-    success: 'bg-[rgba(34,197,94,0.15)] text-[#22C55E] border border-[#22C55E]/30',
-    warning: 'bg-[rgba(245,158,11,0.15)] text-[#F59E0B] border border-[#F59E0B]/30',
-    error: 'bg-[rgba(239,68,68,0.15)] text-[#FFB4AB] border border-[#EF4444]/30',
+    default: 'bg-surface-container text-on-surface border-outline-variant/20',
+    primary: 'bg-primary/10 text-primary border-primary/20',
+    secondary: 'bg-secondary/10 text-secondary border-secondary/20',
+    tertiary: 'bg-tertiary/10 text-tertiary border-tertiary/20',
+    success: 'bg-success/10 text-success border-success/20',
+    warning: 'bg-warning/10 text-warning border-warning/20',
+    error: 'bg-error/10 text-error border-error/20',
   };
 
   return (
-    <div className={`${baseStyles} ${variants[variant]} ${className}`} {...props}>
+    <span className={`${baseStyles} ${variants[variant]} ${className}`} {...props}>
       {children}
-    </div>
+    </span>
   );
 };
 

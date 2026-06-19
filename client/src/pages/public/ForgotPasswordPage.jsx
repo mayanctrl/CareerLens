@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, ArrowLeft, KeyRound } from 'lucide-react';
+import { Mail, ArrowLeft, KeyRound, BrainCircuit } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { showToast } from '../../components/common/Toast';
 import Button from '../../components/common/Button';
@@ -34,28 +34,43 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B132B] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-slide-in-up">
-        <h2 className="text-center text-3xl font-bold tracking-tight text-white mb-2">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-slide-in-up relative z-10">
+        <div className="flex justify-center mb-6">
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center group-hover:shadow-glow-teal transition-shadow border border-outline-variant/10">
+              <BrainCircuit className="w-6 h-6 text-on-primary-container" />
+            </div>
+            <div>
+              <span className="text-headline-md font-bold text-primary tracking-tight">
+                CareerLens
+              </span>
+              <p className="text-[10px] font-semibold text-on-surface-variant/80 uppercase tracking-widest leading-none">AI Agent</p>
+            </div>
+          </Link>
+        </div>
+        <h2 className="text-center text-headline-md font-bold text-on-surface mb-2">
           Reset Password
         </h2>
-        <p className="text-center text-[#BDC9C8]">
+        <p className="text-center text-body-md text-on-surface-variant">
           We'll send you instructions to reset your password.
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <Card glass className="py-8 px-4 sm:px-10 border-[#3A506B]/50 shadow-2xl relative overflow-hidden">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[460px] relative z-10">
+        <Card glass className="py-8 px-4 sm:px-10" accentBar="primary">
           {isSubmitted ? (
             <div className="text-center animate-fade-in">
-              <div className="mx-auto w-16 h-16 bg-[rgba(91,192,190,0.15)] rounded-full flex items-center justify-center mb-4">
-                <Mail className="w-8 h-8 text-[#5BC0BE]" />
+              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-5 border border-primary/20">
+                <Mail className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">Check your email</h3>
-              <p className="text-[#BDC9C8] mb-6">
+              <h3 className="text-headline-sm font-bold text-on-surface mb-2">Check your email</h3>
+              <p className="text-body-md text-on-surface-variant mb-6">
                 We've sent a password reset link to <br/>
-                <span className="font-semibold text-white">{email}</span>
+                <span className="font-semibold text-on-surface">{email}</span>
               </p>
               <Button
                 variant="secondary"
@@ -65,7 +80,7 @@ const ForgotPasswordPage = () => {
                 Try another email
               </Button>
               <div className="mt-6">
-                <Link to="/login" className="flex items-center justify-center text-sm font-medium text-[#5BC0BE] hover:text-[#6FFFE9]">
+                <Link to="/login" className="flex items-center justify-center text-label-md font-semibold text-primary hover:brightness-110">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to sign in
                 </Link>
@@ -94,7 +109,7 @@ const ForgotPasswordPage = () => {
               </Button>
 
               <div className="mt-6 flex justify-center">
-                <Link to="/login" className="flex items-center text-sm font-medium text-[#BDC9C8] hover:text-[#DBE1FF] transition-colors">
+                <Link to="/login" className="flex items-center text-label-md font-semibold text-on-surface-variant hover:text-on-surface transition-colors">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to sign in
                 </Link>

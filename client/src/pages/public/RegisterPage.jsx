@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Compass, Mail, Lock, User, ArrowRight } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { Mail, Lock, User, ArrowRight, BrainCircuit } from 'lucide-react';
 import { showToast } from '../../components/common/Toast';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Card from '../../components/common/Card';
-import api from '../../lib/api'; // Use our axios instance to hit our backend too
+import api from '../../lib/api';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -38,7 +37,6 @@ const RegisterPage = () => {
     setIsLoading(true);
     
     try {
-      // We will call our custom backend register endpoint so it handles creating the profile row
       const response = await api.post('/auth/register', {
         email: formData.email,
         password: formData.password,
@@ -57,34 +55,37 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B132B] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%231c2541\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]">
+    <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-slide-in-up">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-slide-in-up relative z-10">
         <div className="flex justify-center mb-6">
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5BC0BE] to-[#6FFFE9] flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(91,192,190,0.4)] transition-shadow">
-              <Compass className="w-7 h-7 text-[#0B132B]" />
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center group-hover:shadow-glow-teal transition-shadow border border-outline-variant/10">
+              <BrainCircuit className="w-6 h-6 text-on-primary-container" />
             </div>
-            <span className="text-3xl font-bold font-['Geist'] text-white tracking-wide">
-              Career<span className="text-[#5BC0BE]">Lens</span>
-            </span>
+            <div>
+              <span className="text-headline-md font-bold text-primary tracking-tight">
+                CareerLens
+              </span>
+              <p className="text-[10px] font-semibold text-on-surface-variant/80 uppercase tracking-widest leading-none">AI Agent</p>
+            </div>
           </Link>
         </div>
-        <h2 className="text-center text-2xl font-bold tracking-tight text-white">
+        <h2 className="text-center text-headline-md font-bold text-on-surface">
           Start your career journey
         </h2>
-        <p className="mt-2 text-center text-sm text-[#BDC9C8]">
+        <p className="mt-2 text-center text-label-md text-on-surface-variant">
           Already have an account?{' '}
-          <Link to="/login" className="font-medium text-[#5BC0BE] hover:text-[#6FFFE9] transition-colors">
+          <Link to="/login" className="font-semibold text-primary hover:brightness-110 transition-all">
             Sign in
           </Link>
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <Card glass className="py-8 px-4 sm:px-10 border-[#3A506B]/50 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#5BC0BE] to-[#6FFFE9]" />
-          
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[460px] relative z-10">
+        <Card glass className="py-8 px-4 sm:px-10" accentBar="primary">
           <form className="space-y-5" onSubmit={handleSubmit}>
             <Input
               id="fullName"
@@ -145,10 +146,10 @@ const RegisterPage = () => {
             </div>
           </form>
 
-          <p className="mt-6 text-center text-xs text-[#879392]">
+          <p className="mt-6 text-center text-label-sm text-on-surface-variant/75">
             By registering, you agree to our{' '}
-            <a href="#" className="underline hover:text-[#DBE1FF]">Terms of Service</a> and{' '}
-            <a href="#" className="underline hover:text-[#DBE1FF]">Privacy Policy</a>.
+            <a href="#" className="underline hover:text-on-surface">Terms of Service</a> and{' '}
+            <a href="#" className="underline hover:text-on-surface">Privacy Policy</a>.
           </p>
         </Card>
       </div>

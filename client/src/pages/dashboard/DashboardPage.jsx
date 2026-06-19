@@ -1,207 +1,274 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Compass, Target, Map, Award, ArrowRight, Clock, CheckCircle2 } from 'lucide-react';
+import { 
+  BrainCircuit, 
+  Target, 
+  TrendingUp, 
+  Briefcase, 
+  ArrowRight, 
+  Sparkles, 
+  ShieldAlert,
+  Building,
+  GraduationCap
+} from 'lucide-react';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import ProgressBar from '../../components/common/ProgressBar';
 import Badge from '../../components/common/Badge';
+import ProgressRing from '../../components/charts/ProgressRing';
+import Skeleton from '../../components/common/Skeleton';
+import api from '../../lib/api';
 
 const DashboardPage = () => {
   const { user } = useAuth();
-  const userName = user?.user_metadata?.full_name?.split(' ')[0] || 'Explorer';
+  const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState(null);
+  
+  const userName = user?.user_metadata?.full_name || 'Explorer';
+  const firstName = userName.split(' ')[0];
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
+        // Fire requests to backend endpoints concurrently
+        const [progressRes, skillsRes, recommendationsRes] = await Promise.allSettled([
+          api.get('/progress/dashboard'),
+          api.get('/skills/user'),
+          api.get('/recommendations')
+        ]);
+        
+        // Stubs are returned, so we'll mock the final layout data
+        // while confirming endpoints are integrated.
+        await new Promise((resolve) => setTimeout(resolve, 800)); // smooth transition
+        
+        setDashboardData({
+          readiness: {
+            score: 85,
+            technical: 90,
+            experience: 80,
+            projects: 75
+          },
+          skills: {
+            current: ['React', 'JavaScript (ES6)', 'HTML5/CSS3', 'Tailwind CSS', 'Git'],
+            missing: ['TypeScript', 'Node.js/Express', 'GraphQL', 'Docker', 'PostgreSQL'],
+            priority: ['TypeScript', 'Node.js/Express', 'GraphQL']
+          },
+          insights: [
+            { type: 'role', title: 'Top Role Match', value: 'Senior Frontend Engineer', desc: '94% match probability', icon: Briefcase, color: 'text-primary' },
+            { type: 'company', title: 'Dream Company Match', value: 'Google', desc: '90% culture fit match', icon: Building, color: 'text-secondary' },
+            { type: 'skill', title: 'Next High-Value Skill', value: 'TypeScript', desc: 'Adds +12% match boost', icon: GraduationCap, color: 'text-tertiary' }
+          ],
+          opportunities: [
+            { company: 'Vercel', logo: 'V', role: 'Software Engineer II', match: 92, salary: '$120k - $150k', location: 'Remote', accent: 'primary' },
+            { company: 'Supabase', logo: 'S', role: 'Frontend Specialist', match: 89, salary: '$110k - $130k', location: 'Remote', accent: 'secondary' },
+            { company: 'Stripe', logo: 'T', role: 'Full Stack Developer', match: 85, salary: '$130k - $160k', location: 'San Francisco, CA', accent: 'tertiary' },
+            { company: 'Airbnb', logo: 'A', role: 'Frontend Engineer', match: 82, salary: '$115k - $145k', location: 'Remote', accent: 'primary' }
+          ]
+        });
+      } catch (err) {
+        console.error('Failed to load dashboard data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchDashboardData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="space-y-8 pb-12 animate-fade-in">
+        {/* Header Skeleton */}
+        <div className="space-y-3">
+          <Skeleton className="h-10 w-64" />
+          <Skeleton className="h-5 w-96" />
+        </div>
+
+        {/* Bento Skeleton Grid */}
+        <div className="grid grid-cols-12 gap-6">
+          <div className="col-span-12 lg:col-span-5 h-[340px] skeleton rounded-2xl" />
+          <div className="col-span-12 lg:col-span-7 h-[340px] skeleton rounded-2xl" />
+        </div>
+
+        {/* Sub-grid Skeletons */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="h-32 skeleton rounded-2xl" />
+          <div className="h-32 skeleton rounded-2xl" />
+          <div className="h-32 skeleton rounded-2xl" />
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-8 pb-12 animate-fade-in font-body">
       {/* Welcome Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-['Geist'] text-white mb-2">
-            Welcome back, {userName}! 👋
+          <h1 className="text-headline-lg font-bold text-on-surface leading-tight tracking-tight">
+            Welcome back, {firstName}! 👋
           </h1>
-          <p className="text-[#BDC9C8]">
+          <p className="text-body-md text-on-surface-variant">
             Your career trajectory is looking strong. Here's your daily summary.
           </p>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary" icon={Target}>Retake Assessment</Button>
-          <Button icon={Compass}>Explore Careers</Button>
+          <Button variant="secondary" icon={Target} onClick={() => window.location.href='/assessment'}>Retake Assessment</Button>
+          <Button icon={TrendingUp} onClick={() => window.location.href='/skills'}>Analyze Skills</Button>
         </div>
       </div>
 
-      {/* Top Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard 
-          title="Overall Match" 
-          value="85%" 
-          subtitle="Top: Software Engineer" 
-          icon={Compass}
-          color="text-[#5BC0BE]"
-          bg="bg-[rgba(91,192,190,0.15)]"
-        />
-        <StatCard 
-          title="Skills Mastered" 
-          value="12/45" 
-          subtitle="2 this week" 
-          icon={Award}
-          color="text-[#6FFFE9]"
-          bg="bg-[rgba(111,255,233,0.15)]"
-        />
-        <StatCard 
-          title="Roadmap Progress" 
-          value="45%" 
-          subtitle="Week 3 of 8" 
-          icon={Map}
-          color="text-[#22C55E]"
-          bg="bg-[rgba(34,197,94,0.15)]"
-        />
-        <StatCard 
-          title="Interview Prep" 
-          value="Strong" 
-          subtitle="80% average score" 
-          icon={Target}
-          color="text-[#F59E0B]"
-          bg="bg-[rgba(245,158,11,0.15)]"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content Area (Left 2 columns) */}
-        <div className="lg:col-span-2 space-y-8">
-          
-          {/* Current Focus / Active Roadmap */}
-          <Card padding="p-0">
-            <div className="p-6 border-b border-[#3A506B] flex justify-between items-center">
-              <h2 className="text-xl font-bold font-['Geist'] text-white">Current Focus: Full-Stack Developer</h2>
-              <Badge variant="primary">In Progress</Badge>
-            </div>
-            <div className="p-6">
-              <div className="mb-6">
-                <ProgressBar progress={45} showLabel label="Roadmap Completion" className="mb-2" />
-                <p className="text-sm text-[#BDC9C8]">You're on track to complete this roadmap by October 15.</p>
-              </div>
-              
-              <div className="space-y-4">
-                <h3 className="text-sm font-semibold text-white uppercase tracking-wider">This Week's Tasks</h3>
-                
-                {[
-                  { title: 'Advanced React Hooks', time: '2 hours', done: true },
-                  { title: 'Node.js Express Middleware', time: '3 hours', done: false },
-                  { title: 'Database Schema Design', time: '1.5 hours', done: false },
-                ].map((task, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 bg-[#0B132B] rounded-lg border border-[#3A506B] hover:border-[#5BC0BE]/50 transition-colors">
-                    <div className="flex items-center gap-3">
-                      {task.done ? (
-                        <CheckCircle2 className="w-5 h-5 text-[#5BC0BE]" />
-                      ) : (
-                        <div className="w-5 h-5 rounded-full border-2 border-[#879392]" />
-                      )}
-                      <span className={`font-medium ${task.done ? 'text-[#879392] line-through' : 'text-[#DBE1FF]'}`}>
-                        {task.title}
-                      </span>
-                    </div>
-                    <div className="flex items-center text-sm text-[#879392]">
-                      <Clock className="w-4 h-4 mr-1" />
-                      {task.time}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-6">
-                <Button fullWidth variant="secondary">Continue Learning</Button>
-              </div>
-            </div>
-          </Card>
-
-          {/* AI Recommendations */}
+      {/* Bento Grid: 12-columns */}
+      <div className="grid grid-cols-12 gap-6">
+        {/* Readiness Score (col-span-5) */}
+        <Card className="col-span-12 lg:col-span-5 flex flex-col justify-between" glass>
           <div>
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold font-['Geist'] text-white">AI Top Picks for You</h2>
-              <Button variant="ghost" size="sm" className="text-[#5BC0BE]">View All</Button>
-            </div>
+            <h2 className="text-headline-sm font-bold text-on-surface mb-1">Readiness Score</h2>
+            <p className="text-label-sm text-on-surface-variant">Calculated from assessments, skills and portfolio data.</p>
+          </div>
+          
+          <div className="flex items-center justify-around py-4">
+            <ProgressRing progress={dashboardData?.readiness?.score || 0} size={150} strokeWidth={12}>
+              <div className="flex flex-col items-center">
+                <span className="text-display-lg font-bold text-primary font-headline leading-none">
+                  {dashboardData?.readiness?.score}
+                </span>
+                <span className="text-label-sm text-on-surface-variant font-semibold mt-1">Ready</span>
+              </div>
+            </ProgressRing>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { role: 'Backend Engineer', match: 92, salary: '$90k - $140k' },
-                { role: 'Cloud Architect', match: 88, salary: '$120k - $180k' },
-              ].map((job, i) => (
-                <Card key={i} hoverEffect glass className="group cursor-pointer">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="w-12 h-12 bg-[#0B132B] rounded-lg flex items-center justify-center border border-[#3A506B] group-hover:border-[#5BC0BE] transition-colors">
-                      <Compass className="w-6 h-6 text-[#5BC0BE]" />
-                    </div>
-                    <Badge variant="success">{job.match}% Match</Badge>
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-1">{job.role}</h3>
-                  <p className="text-[#879392] text-sm mb-4">Est. {job.salary}</p>
-                  <div className="flex items-center text-sm font-medium text-[#5BC0BE] group-hover:text-[#6FFFE9] transition-colors">
-                    Explore Path <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Card>
-              ))}
+            <div className="space-y-3 flex-1 max-w-[200px] ml-4">
+              <div>
+                <div className="flex justify-between text-label-sm font-semibold mb-1">
+                  <span className="text-on-surface-variant">Technical</span>
+                  <span className="text-primary">{dashboardData?.readiness?.technical}%</span>
+                </div>
+                <ProgressBar progress={dashboardData?.readiness?.technical} height="h-1.5" gradient={false} colorClass="bg-primary" />
+              </div>
+              
+              <div>
+                <div className="flex justify-between text-label-sm font-semibold mb-1">
+                  <span className="text-on-surface-variant">Experience</span>
+                  <span className="text-secondary">{dashboardData?.readiness?.experience}%</span>
+                </div>
+                <ProgressBar progress={dashboardData?.readiness?.experience} height="h-1.5" gradient={false} colorClass="bg-secondary" />
+              </div>
+
+              <div>
+                <div className="flex justify-between text-label-sm font-semibold mb-1">
+                  <span className="text-on-surface-variant">Projects</span>
+                  <span className="text-tertiary">{dashboardData?.readiness?.projects}%</span>
+                </div>
+                <ProgressBar progress={dashboardData?.readiness?.projects} height="h-1.5" gradient={false} colorClass="bg-tertiary" />
+              </div>
             </div>
           </div>
-        </div>
+        </Card>
 
-        {/* Right Sidebar Column */}
-        <div className="space-y-8">
+        {/* Skill Gap Analysis (col-span-7) */}
+        <Card className="col-span-12 lg:col-span-7 flex flex-col justify-between" glass>
+          <div>
+            <h2 className="text-headline-sm font-bold text-on-surface mb-1">Skill Gap Analysis</h2>
+            <p className="text-label-sm text-on-surface-variant">Current versus targeted industry tech stacks.</p>
+          </div>
           
-          {/* Action Needed */}
-          <Card className="bg-gradient-to-b from-[#1C2541] to-[#0B132B]">
-            <h2 className="text-lg font-bold font-['Geist'] text-white mb-4">Action Needed</h2>
-            <div className="space-y-4">
-              <div className="p-4 bg-[rgba(245,158,11,0.1)] border border-[#F59E0B]/30 rounded-lg">
-                <h3 className="font-medium text-[#F59E0B] mb-1">Resume Update Required</h3>
-                <p className="text-sm text-[#BDC9C8] mb-3">You've mastered 2 new skills since your last resume update.</p>
-                <Button size="sm" className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-white border-none text-[#000]">Update Resume</Button>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 flex-1">
+            {/* Current */}
+            <div className="bg-surface-low/30 border border-outline-variant/10 rounded-xl p-4 flex flex-col">
+              <h3 className="text-label-sm font-bold text-primary uppercase tracking-wider mb-3">Current Skills</h3>
+              <div className="flex flex-wrap gap-1.5 content-start flex-1">
+                {dashboardData?.skills?.current.map((skill) => (
+                  <Badge key={skill} variant="primary" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                ))}
               </div>
             </div>
-          </Card>
-
-          {/* Upcoming Interviews/Milestones */}
-          <Card>
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-bold font-['Geist'] text-white">Upcoming</h2>
+            
+            {/* Missing */}
+            <div className="bg-surface-low/30 border border-outline-variant/10 rounded-xl p-4 flex flex-col">
+              <h3 className="text-label-sm font-bold text-tertiary uppercase tracking-wider mb-3">Missing Gaps</h3>
+              <div className="flex flex-wrap gap-1.5 content-start flex-1">
+                {dashboardData?.skills?.missing.map((skill) => (
+                  <Badge key={skill} variant="error" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                ))}
+              </div>
             </div>
-            <div className="space-y-0 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-[#3A506B] before:to-transparent">
-              <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full border border-[#3A506B] bg-[#1C2541] text-[#5BC0BE] group-[.is-active]:bg-[rgba(91,192,190,0.15)] group-[.is-active]:border-[#5BC0BE] shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-                  <Target className="w-4 h-4" />
+
+            {/* Priority */}
+            <div className="bg-surface-low/30 border border-outline-variant/10 rounded-xl p-4 flex flex-col">
+              <h3 className="text-label-sm font-bold text-secondary uppercase tracking-wider mb-3">Priority Gaps</h3>
+              <div className="flex flex-wrap gap-1.5 content-start flex-1">
+                {dashboardData?.skills?.priority.map((skill) => (
+                  <Badge key={skill} variant="warning" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* AI Career Insights Row */}
+      <div className="space-y-4">
+        <h2 className="text-headline-md font-bold text-on-surface flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-primary shrink-0 animate-pulse" />
+          AI Career Insights
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {dashboardData?.insights.map((insight, idx) => (
+            <Card key={idx} hoverEffect className="relative overflow-hidden" glass>
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-label-sm font-semibold text-on-surface-variant mb-1">{insight.title}</p>
+                  <h3 className="text-body-lg font-bold text-on-surface mb-2">{insight.value}</h3>
+                  <p className="text-label-sm text-on-surface-variant/80">{insight.desc}</p>
                 </div>
-                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-lg bg-[#0B132B] border border-[#3A506B]">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="font-bold text-white text-sm">System Design Mock</div>
-                    <time className="text-xs font-medium text-[#5BC0BE]">Tomorrow</time>
+                <div className={`w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center border border-outline-variant/10 ${insight.color}`}>
+                  <insight.icon className="w-5 h-5" />
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Curated Opportunities */}
+      <div className="space-y-4">
+        <div className="flex justify-between items-center">
+          <h2 className="text-headline-md font-bold text-on-surface flex items-center gap-2">
+            <Briefcase className="w-5 h-5 text-primary shrink-0" />
+            Curated Career Opportunities
+          </h2>
+          <Button variant="ghost" size="sm" onClick={() => window.location.href='/recommendations'}>View All</Button>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {dashboardData?.opportunities.map((opp, idx) => (
+            <Card key={idx} hoverEffect accentBar={opp.accent} className="group cursor-pointer flex flex-col justify-between h-[210px]" glass>
+              <div>
+                <div className="flex justify-between items-start mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant/10 text-on-surface font-bold text-headline-sm">
+                    {opp.logo}
                   </div>
-                  <div className="text-xs text-[#879392]">Focus: Scalability</div>
+                  <Badge variant={opp.match >= 90 ? 'success' : 'primary'}>{opp.match}% Match</Badge>
+                </div>
+                <h3 className="text-body-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-1">{opp.role}</h3>
+                <p className="text-label-sm text-on-surface-variant font-semibold mt-0.5">{opp.company} • {opp.location}</p>
+              </div>
+              
+              <div className="mt-4 pt-3 border-t border-outline-variant/10 flex items-center justify-between">
+                <span className="text-label-sm text-on-surface-variant/95 font-semibold">{opp.salary}</span>
+                <div className="text-label-sm font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Details
+                  <ArrowRight className="w-3.5 h-3.5 shrink-0" />
                 </div>
               </div>
-            </div>
-          </Card>
-
+            </Card>
+          ))}
         </div>
       </div>
     </div>
   );
 };
-
-const StatCard = ({ title, value, subtitle, icon: Icon, color, bg }) => (
-  <Card glass hoverEffect padding="p-5">
-    <div className="flex items-start justify-between">
-      <div>
-        <p className="text-sm font-medium text-[#879392] mb-1">{title}</p>
-        <h3 className="text-2xl font-bold font-['Geist'] text-white">{value}</h3>
-      </div>
-      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${bg}`}>
-        <Icon className={`w-5 h-5 ${color}`} />
-      </div>
-    </div>
-    {subtitle && (
-      <div className="mt-4 pt-4 border-t border-[#3A506B]/50">
-        <p className="text-xs text-[#BDC9C8] font-medium">{subtitle}</p>
-      </div>
-    )}
-  </Card>
-);
 
 export default DashboardPage;

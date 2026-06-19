@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, ChevronRight, ChevronLeft, Target, Brain, MessageSquare, Lightbulb, UserCheck, Activity, Award } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { CheckCircle2, ChevronRight, ChevronLeft, Target, Brain, MessageSquare, Lightbulb } from 'lucide-react';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import ProgressBar from '../../components/common/ProgressBar';
 import api from '../../lib/api';
 import { showToast } from '../../components/common/Toast';
 
-// Mock questions for the assessment
 const assessmentCategories = [
   {
     id: 'technical',
@@ -87,9 +85,6 @@ const AssessmentPage = () => {
     setIsSubmitting(true);
     
     try {
-      // In a real app, you'd calculate these properly based on all answers
-      // For this MVP, we're generating scores based on the mock answers
-      
       const calculateScore = (categoryPrefix) => {
         const categoryAnswers = Object.entries(answers)
           .filter(([key]) => key.startsWith(categoryPrefix))
@@ -97,7 +92,6 @@ const AssessmentPage = () => {
         
         if (categoryAnswers.length === 0) return 50;
         
-        // Convert 1-5 scale to 0-100 scale roughly
         const sum = categoryAnswers.reduce((a, b) => a + b, 0);
         const avg = sum / categoryAnswers.length;
         return Math.round((avg / 5) * 100);
@@ -108,7 +102,6 @@ const AssessmentPage = () => {
         communication_score: calculateScore('c'),
         creativity_score: calculateScore('cr'),
         leadership_score: calculateScore('l'),
-        // Fills in missing scores with reasonable defaults for the engine
         interest_score: 85,
         aptitude_score: 75,
         personality_score: 80,
@@ -128,36 +121,36 @@ const AssessmentPage = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-8">
+    <div className="max-w-3xl mx-auto py-8 font-body">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold font-['Geist'] text-white mb-2">
+        <h1 className="text-headline-lg font-bold text-on-surface mb-2">
           Career Assessment
         </h1>
-        <p className="text-[#BDC9C8]">
-          Let's discover your unique cognitive profile to match you with the perfect career paths.
+        <p className="text-body-md text-on-surface-variant">
+          Discover your unique cognitive profile to match you with matching career paths.
         </p>
       </div>
 
-      <Card className="mb-8 p-0">
-        <div className="p-6 border-b border-[#3A506B] bg-[#1C2541]">
+      <Card className="mb-8 p-0" glass>
+        <div className="p-6 border-b border-outline-variant/10 bg-surface-container-low">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[rgba(91,192,190,0.15)] flex items-center justify-center">
-                <currentCategory.icon className="w-5 h-5 text-[#5BC0BE]" />
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
+                <currentCategory.icon className="w-5 h-5 text-primary" />
               </div>
-              <h2 className="text-xl font-bold text-white">{currentCategory.title}</h2>
+              <h2 className="text-headline-sm font-bold text-on-surface">{currentCategory.title}</h2>
             </div>
-            <span className="text-sm font-medium text-[#879392]">
+            <span className="text-label-sm font-semibold text-on-surface-variant">
               Step {currentStep + 1} of {totalSteps}
             </span>
           </div>
-          <ProgressBar progress={progress} height="h-1.5" gradient={true} />
+          <ProgressBar progress={progress} height="h-1.5" gradient={false} colorClass="bg-primary" />
         </div>
 
-        <div className="p-6 space-y-8">
+        <div className="p-6 space-y-8 bg-surface/50">
           {currentCategory.questions.map((q, idx) => (
             <div key={q.id} className="animate-fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
-              <h3 className="text-lg font-medium text-[#DBE1FF] mb-4">
+              <h3 className="text-body-lg font-semibold text-on-surface mb-4">
                 {idx + 1}. {q.text}
               </h3>
               
@@ -167,18 +160,18 @@ const AssessmentPage = () => {
                     key={val}
                     onClick={() => handleAnswer(q.id, val)}
                     className={`
-                      flex-1 py-3 rounded-lg border transition-all
+                      flex-1 py-3 rounded-lg border font-bold font-headline transition-all duration-normal active:scale-95 outline-none
                       ${answers[q.id] === val 
-                        ? 'bg-[#5BC0BE] border-[#5BC0BE] text-[#0B132B] shadow-[0_0_15px_rgba(91,192,190,0.3)]' 
-                        : 'bg-[#0B132B] border-[#3A506B] text-[#879392] hover:border-[#5BC0BE]/50 hover:text-[#DBE1FF]'
+                        ? 'bg-primary border-transparent text-on-primary shadow-glow-strong' 
+                        : 'bg-surface-container-low border-outline-variant/20 text-on-surface-variant hover:border-primary/40 hover:text-on-surface'
                       }
                     `}
                   >
-                    <span className="font-bold">{val}</span>
+                    <span>{val}</span>
                   </button>
                 ))}
               </div>
-              <div className="flex justify-between mt-2 text-xs text-[#879392] px-2">
+              <div className="flex justify-between mt-2.5 text-label-sm text-on-surface-variant/75 px-1 font-semibold">
                 <span>Strongly Disagree</span>
                 <span>Strongly Agree</span>
               </div>
@@ -186,12 +179,11 @@ const AssessmentPage = () => {
           ))}
         </div>
 
-        <div className="p-6 border-t border-[#3A506B] bg-[#0B132B] flex justify-between rounded-b-xl">
+        <div className="p-6 border-t border-outline-variant/10 bg-surface-container-low flex justify-between rounded-b-2xl">
           <Button 
             variant="ghost" 
             onClick={handlePrev}
             disabled={currentStep === 0 || isSubmitting}
-            className="pl-0"
           >
             <ChevronLeft className="w-4 h-4 mr-2" />
             Previous
@@ -208,8 +200,8 @@ const AssessmentPage = () => {
         </div>
       </Card>
       
-      <div className="flex justify-center text-sm text-[#879392] items-center gap-2">
-        <CheckCircle2 className="w-4 h-4 text-[#5BC0BE]" />
+      <div className="flex justify-center text-label-sm font-semibold text-on-surface-variant/80 items-center gap-2">
+        <CheckCircle2 className="w-4 h-4 text-primary" />
         Your answers are saved automatically and kept strictly confidential.
       </div>
     </div>

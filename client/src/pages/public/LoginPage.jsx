@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-form';
-import { Compass, Mail, Lock, LogIn } from 'lucide-react';
+import { Mail, Lock, LogIn, BrainCircuit } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
-import { useAuth } from '../../contexts/AuthContext';
 import { showToast } from '../../components/common/Toast';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
@@ -26,7 +24,7 @@ const LoginPage = () => {
     setIsLoading(true);
     
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -43,34 +41,37 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B132B] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%231c2541\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]">
-      
-      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-slide-in-up">
+    <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+
+      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-slide-in-up relative z-10">
         <div className="flex justify-center mb-6">
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5BC0BE] to-[#6FFFE9] flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(91,192,190,0.4)] transition-shadow">
-              <Compass className="w-7 h-7 text-[#0B132B]" />
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center group-hover:shadow-glow-teal transition-shadow border border-outline-variant/10">
+              <BrainCircuit className="w-6 h-6 text-on-primary-container" />
             </div>
-            <span className="text-3xl font-bold font-['Geist'] text-white tracking-wide">
-              Career<span className="text-[#5BC0BE]">Lens</span>
-            </span>
+            <div>
+              <span className="text-headline-md font-bold text-primary tracking-tight">
+                CareerLens
+              </span>
+              <p className="text-[10px] font-semibold text-on-surface-variant/80 uppercase tracking-widest leading-none">AI Agent</p>
+            </div>
           </Link>
         </div>
-        <h2 className="text-center text-2xl font-bold tracking-tight text-white">
+        <h2 className="text-center text-headline-md font-bold text-on-surface">
           Sign in to your account
         </h2>
-        <p className="mt-2 text-center text-sm text-[#BDC9C8]">
+        <p className="mt-2 text-center text-label-md text-on-surface-variant">
           Or{' '}
-          <Link to="/register" className="font-medium text-[#5BC0BE] hover:text-[#6FFFE9] transition-colors">
+          <Link to="/register" className="font-semibold text-primary hover:brightness-110 transition-all">
             create a new account
           </Link>
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <Card glass className="py-8 px-4 sm:px-10 border-[#3A506B]/50 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#5BC0BE] to-[#6FFFE9]" />
-          
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[460px] relative z-10">
+        <Card glass className="py-8 px-4 sm:px-10" accentBar="primary">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               id="email"
@@ -84,7 +85,7 @@ const LoginPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <Input
                 id="password"
                 label="Password"
@@ -97,7 +98,7 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className="flex justify-end pt-1">
-                <Link to="/forgot-password" className="text-sm font-medium text-[#5BC0BE] hover:text-[#6FFFE9]">
+                <Link to="/forgot-password" className="text-label-sm font-semibold text-primary hover:brightness-110">
                   Forgot your password?
                 </Link>
               </div>
@@ -116,14 +117,14 @@ const LoginPage = () => {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[#3A506B]" />
+                <div className="w-full border-t border-outline-variant/15" />
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-[#1C2541] px-2 text-[#879392]">Demo Access</span>
+              <div className="relative flex justify-center text-label-sm">
+                <span className="bg-surface-container px-2 text-on-surface-variant font-semibold">Demo Access</span>
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-5">
               <Button
                 variant="secondary"
                 fullWidth

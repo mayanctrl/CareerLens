@@ -45,12 +45,13 @@ const Button = React.forwardRef(({
       type={type}
       className={classes}
       disabled={disabled || isLoading}
+      aria-busy={isLoading ? "true" : undefined}
       {...props}
     >
       {isLoading ? (
-        <Loader2 className="h-4 w-4 animate-spin shrink-0" />
+        <Loader2 className="h-4 w-4 animate-spin shrink-0" aria-hidden="true" />
       ) : Icon ? (
-        <Icon className="h-4 w-4 shrink-0" />
+        <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
       ) : null}
       {children}
     </button>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, ArrowLeft, KeyRound, BrainCircuit } from 'lucide-react';
+import SEO from '../../components/common/SEO';
 import { supabase } from '../../lib/supabase';
 import { showToast } from '../../components/common/Toast';
 import Button from '../../components/common/Button';
@@ -35,6 +36,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      <SEO title="Forgot Password" description="Reset your CareerLens password to regain access to your AI career development dashboards." />
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
       
@@ -42,7 +44,7 @@ const ForgotPasswordPage = () => {
         <div className="flex justify-center mb-6">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center group-hover:shadow-glow-teal transition-shadow border border-outline-variant/10">
-              <BrainCircuit className="w-6 h-6 text-on-primary-container" />
+              <BrainCircuit className="w-6 h-6 text-on-primary-container" aria-hidden="true" />
             </div>
             <div>
               <span className="text-headline-md font-bold text-primary tracking-tight">
@@ -65,7 +67,7 @@ const ForgotPasswordPage = () => {
           {isSubmitted ? (
             <div className="text-center animate-fade-in">
               <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-5 border border-primary/20">
-                <Mail className="w-8 h-8 text-primary" />
+                <Mail className="w-8 h-8 text-primary" aria-hidden="true" />
               </div>
               <h3 className="text-headline-sm font-bold text-on-surface mb-2">Check your email</h3>
               <p className="text-body-md text-on-surface-variant mb-6">
@@ -81,7 +83,7 @@ const ForgotPasswordPage = () => {
               </Button>
               <div className="mt-6">
                 <Link to="/login" className="flex items-center justify-center text-label-md font-semibold text-primary hover:brightness-110">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
                   Back to sign in
                 </Link>
               </div>
@@ -110,7 +112,7 @@ const ForgotPasswordPage = () => {
 
               <div className="mt-6 flex justify-center">
                 <Link to="/login" className="flex items-center text-label-md font-semibold text-on-surface-variant hover:text-on-surface transition-colors">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
                   Back to sign in
                 </Link>
               </div>

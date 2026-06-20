@@ -3,15 +3,43 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, BrainCircuit, Target, Rocket, Award, Shield, Cpu, Map, Compass } from 'lucide-react';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
+import SEO from '../../components/common/SEO';
+
+const landingSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://careerlens.ai/#organization",
+      "name": "CareerLens",
+      "url": "https://careerlens.ai",
+      "logo": "https://careerlens.ai/logo.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://careerlens.ai/#website",
+      "url": "https://careerlens.ai",
+      "name": "CareerLens",
+      "publisher": {
+        "@id": "https://careerlens.ai/#organization"
+      }
+    }
+  ]
+};
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background text-on-surface font-body overflow-x-hidden">
+      <SEO 
+        title="AI Career Agent" 
+        description="CareerLens is an AI-powered Career Guidance Platform. Stop guessing your next career move. Analyze your skills, interests, and industry trends to generate a personalized roadmap."
+        schema={landingSchema} 
+      />
       {/* Navigation */}
       <nav className="container mx-auto px-6 py-5 flex justify-between items-center relative z-10">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
-            <BrainCircuit className="w-5 h-5 text-on-primary-container" />
+            <BrainCircuit className="w-5 h-5 text-on-primary-container" aria-hidden="true" />
           </div>
           <div>
             <span className="text-headline-md font-bold text-primary tracking-tight">
@@ -58,7 +86,7 @@ const LandingPage = () => {
             <Link to="/register">
               <Button size="lg" className="w-full sm:w-auto shadow-glow-teal group">
                 Start Your Assessment
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
               </Button>
             </Link>
             <Link to="/login">
@@ -94,7 +122,7 @@ const LandingPage = () => {
                 accentBar={i % 3 === 0 ? 'primary' : i % 3 === 1 ? 'secondary' : null}
               >
                 <div className="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-outline-variant/10">
-                  <feature.icon className="w-5 h-5 text-primary" />
+                  <feature.icon className="w-5 h-5 text-primary" aria-hidden="true" />
                 </div>
                 <h3 className="text-headline-sm font-bold text-on-surface mb-3">{feature.title}</h3>
                 <p className="text-body-md text-on-surface-variant leading-relaxed">{feature.desc}</p>
@@ -109,7 +137,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-6 text-center text-on-surface-variant">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-8 h-8 rounded bg-primary-container flex items-center justify-center">
-              <BrainCircuit className="w-4 h-4 text-on-primary-container" />
+              <BrainCircuit className="w-4 h-4 text-on-primary-container" aria-hidden="true" />
             </div>
             <span className="text-headline-sm font-bold text-on-surface tracking-tight">
               CareerLens

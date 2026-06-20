@@ -1,6 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, ChevronRight, ChevronLeft, Target, Brain, MessageSquare, Lightbulb } from 'lucide-react';
+import SEO from '../../components/common/SEO';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://careerlens.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Dashboard",
+      "item": "https://careerlens.ai/dashboard"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Assessment",
+      "item": "https://careerlens.ai/assessment"
+    }
+  ]
+};
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import ProgressBar from '../../components/common/ProgressBar';
@@ -122,6 +148,7 @@ const AssessmentPage = () => {
 
   return (
     <div className="max-w-3xl mx-auto py-8 font-body">
+      <SEO title="Career Assessment" description="Analyze your skills, technical aptitudes, communication style, and leadership qualities to discover matching career paths." schema={breadcrumbSchema} />
       <div className="mb-8">
         <h1 className="text-headline-lg font-bold text-on-surface mb-2">
           Career Assessment
@@ -136,7 +163,7 @@ const AssessmentPage = () => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
-                <currentCategory.icon className="w-5 h-5 text-primary" />
+                <currentCategory.icon className="w-5 h-5 text-primary" aria-hidden="true" />
               </div>
               <h2 className="text-headline-sm font-bold text-on-surface">{currentCategory.title}</h2>
             </div>
@@ -159,6 +186,8 @@ const AssessmentPage = () => {
                   <button
                     key={val}
                     onClick={() => handleAnswer(q.id, val)}
+                    aria-label={`Score ${val} out of 5`}
+                    aria-pressed={answers[q.id] === val ? "true" : "false"}
                     className={`
                       flex-1 py-3 rounded-lg border font-bold font-headline transition-all duration-normal active:scale-95 outline-none
                       ${answers[q.id] === val 
@@ -185,7 +214,7 @@ const AssessmentPage = () => {
             onClick={handlePrev}
             disabled={currentStep === 0 || isSubmitting}
           >
-            <ChevronLeft className="w-4 h-4 mr-2" />
+            <ChevronLeft className="w-4 h-4 mr-2" aria-hidden="true" />
             Previous
           </Button>
           
@@ -195,13 +224,13 @@ const AssessmentPage = () => {
             isLoading={isSubmitting}
           >
             {currentStep === totalSteps - 1 ? 'Submit Assessment' : 'Next Category'}
-            {currentStep < totalSteps - 1 && <ChevronRight className="w-4 h-4 ml-2" />}
+            {currentStep < totalSteps - 1 && <ChevronRight className="w-4 h-4 ml-2" aria-hidden="true" />}
           </Button>
         </div>
       </Card>
       
       <div className="flex justify-center text-label-sm font-semibold text-on-surface-variant/80 items-center gap-2">
-        <CheckCircle2 className="w-4 h-4 text-primary" />
+        <CheckCircle2 className="w-4 h-4 text-primary" aria-hidden="true" />
         Your answers are saved automatically and kept strictly confidential.
       </div>
     </div>

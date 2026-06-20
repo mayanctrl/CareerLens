@@ -14,15 +14,16 @@ const TopNav = ({ toggleSidebar }) => {
           className="p-2 -ml-2 text-on-surface-variant hover:text-on-surface rounded-lg hover:bg-surface-variant/40 lg:hidden transition-colors"
           aria-label="Open sidebar"
         >
-          <Menu className="w-5 h-5" />
+          <Menu className="w-5 h-5" aria-hidden="true" />
         </button>
 
         {/* Global Search */}
         <div className="hidden md:flex items-center relative max-w-md w-full">
-          <Search className="w-4 h-4 text-on-surface-variant absolute left-3" />
+          <Search className="w-4 h-4 text-on-surface-variant absolute left-3" aria-hidden="true" />
           <input 
             type="text" 
             placeholder="Search skills, careers, resources..." 
+            aria-label="Search skills, careers, resources"
             className="w-full bg-surface-container-low border border-outline-variant/20 text-label-md text-on-surface rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-on-surface-variant"
           />
         </div>
@@ -34,8 +35,8 @@ const TopNav = ({ toggleSidebar }) => {
           className="p-2 text-on-surface-variant hover:text-on-surface rounded-lg hover:bg-surface-variant/40 transition-colors"
           aria-label="Toggle theme"
         >
-          <Sun className="w-5 h-5 hidden dark:block" />
-          <Moon className="w-5 h-5 dark:hidden" />
+          <Sun className="w-5 h-5 hidden dark:block" aria-hidden="true" />
+          <Moon className="w-5 h-5 dark:hidden" aria-hidden="true" />
         </button>
 
         {/* Notifications */}
@@ -44,8 +45,8 @@ const TopNav = ({ toggleSidebar }) => {
           className="relative p-2 text-on-surface-variant hover:text-on-surface rounded-lg hover:bg-surface-variant/40 transition-colors"
           aria-label="Notifications"
         >
-          <Bell className="w-5 h-5" />
-          <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full shadow-glow-teal animate-pulse" />
+          <Bell className="w-5 h-5" aria-hidden="true" />
+          <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full animate-pulse" />
         </Link>
 
         <div className="w-px h-6 bg-outline-variant/20 hidden sm:block" />
@@ -59,7 +60,7 @@ const TopNav = ({ toggleSidebar }) => {
             <span className="text-label-sm text-primary font-medium">Pro Member</span>
           </div>
           <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-surface-high border border-outline-variant/20 flex items-center justify-center overflow-hidden">
-            <User className="w-4 h-4 text-on-surface" />
+            <User className="w-4 h-4 text-on-surface" aria-hidden="true" />
           </div>
         </Link>
       </div>

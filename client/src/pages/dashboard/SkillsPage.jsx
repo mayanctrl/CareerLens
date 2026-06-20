@@ -4,10 +4,37 @@ import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import Badge from '../../components/common/Badge';
 import Input from '../../components/common/Input';
+import Select from '../../components/common/Select';
 import ProgressBar from '../../components/common/ProgressBar';
 import Loader from '../../components/common/Loader';
 import api from '../../lib/api';
 import { showToast } from '../../components/common/Toast';
+import SEO from '../../components/common/SEO';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://careerlens.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Dashboard",
+      "item": "https://careerlens.ai/dashboard"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Skill Profile",
+      "item": "https://careerlens.ai/skills"
+    }
+  ]
+};
 
 const MOCK_USER_SKILLS = [
   { id: 1, name: 'React', category: 'Technical', level: 'Expert', current: 90, target: 95 },
@@ -97,6 +124,7 @@ const SkillsPage = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-12 animate-fade-in font-body">
+      <SEO title="Skill Profile" description="Analyze your current skills, map out career priorities, and identify tech stack gaps using AI assessments." schema={breadcrumbSchema} />
       {/* Title */}
       <div>
         <h1 className="text-headline-lg font-bold text-on-surface mb-2">Skill Profile Analysis</h1>
@@ -110,13 +138,13 @@ const SkillsPage = () => {
         <div className="lg:col-span-8 space-y-6">
           <Card glass>
             <h2 className="text-headline-sm font-bold text-on-surface mb-6 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-primary shrink-0" />
+              <ShieldCheck className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
               Skill Gap Metrics
             </h2>
             
-            <div className="space-y-6">
+            <ul className="space-y-6">
               {skills.map((skill) => (
-                <div key={skill.id} className="group relative bg-surface-container-low/40 p-4 border border-outline-variant/10 rounded-xl flex items-center justify-between">
+                <li key={skill.id} className="group relative bg-surface-container-low/40 p-4 border border-outline-variant/10 rounded-xl flex items-center justify-between">
                   <div className="flex-1 mr-6">
                     <div className="flex justify-between items-center mb-2">
                       <div className="flex items-center gap-2">
@@ -139,42 +167,42 @@ const SkillsPage = () => {
                     className="p-2 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all shrink-0"
                     aria-label={`Remove ${skill.name}`}
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4" aria-hidden="true" />
                   </button>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </Card>
 
           {/* AI Training Recommendations */}
           <Card glass accentBar="secondary">
             <h2 className="text-headline-sm font-bold text-on-surface mb-4 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-secondary shrink-0" />
+              <Sparkles className="w-5 h-5 text-secondary shrink-0" aria-hidden="true" />
               AI Upskilling Action Items
             </h2>
-            <div className="space-y-4">
-              <div className="p-4 bg-surface-low border border-outline-variant/10 rounded-xl flex items-start gap-4">
+            <ul className="space-y-4">
+              <li className="p-4 bg-surface-low border border-outline-variant/10 rounded-xl flex items-start gap-4">
                 <div className="w-10 h-10 rounded-lg bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary shrink-0">
-                  <BookOpen className="w-5 h-5" />
+                  <BookOpen className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="text-body-md font-bold text-on-surface mb-1">TypeScript Masterclass</h4>
                   <p className="text-label-sm text-on-surface-variant mb-2">Bridge your TypeScript gap to boost your Software Engineer match probability by +12%.</p>
                   <Button variant="ghost" size="sm" className="p-0 text-secondary hover:bg-transparent font-bold">Start Course →</Button>
                 </div>
-              </div>
+              </li>
 
-              <div className="p-4 bg-surface-low border border-outline-variant/10 rounded-xl flex items-start gap-4">
+              <li className="p-4 bg-surface-low border border-outline-variant/10 rounded-xl flex items-start gap-4">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
-                  <AlertCircle className="w-5 h-5" />
+                  <AlertCircle className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="text-body-md font-bold text-on-surface mb-1">Advanced Node.js & REST APIs</h4>
                   <p className="text-label-sm text-on-surface-variant mb-2">Build portfolio integrations to satisfy your Backend Developer requirements.</p>
                   <Button variant="ghost" size="sm" className="p-0 text-primary hover:bg-transparent font-bold">View Curriculum →</Button>
                 </div>
-              </div>
-            </div>
+              </li>
+            </ul>
           </Card>
         </div>
 
@@ -184,6 +212,7 @@ const SkillsPage = () => {
             <h2 className="text-headline-sm font-bold text-on-surface mb-4">Add New Skill</h2>
             <form onSubmit={handleAddSkill} className="space-y-4">
               <Input
+                id="new-skill-name"
                 label="Skill Name"
                 placeholder="e.g. Node.js, AWS, Kubernetes"
                 value={newSkillName}
@@ -191,31 +220,31 @@ const SkillsPage = () => {
                 required
               />
 
-              <div className="flex flex-col gap-1.5">
-                <label className="text-label-md font-semibold text-on-surface-variant">Category</label>
-                <select
-                  value={newSkillCategory}
-                  onChange={(e) => setNewSkillCategory(e.target.value)}
-                  className="flex h-10 w-full rounded-lg border bg-surface-container-low px-3.5 py-2 text-body-md text-on-surface border-outline-variant/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary outline-none"
-                >
-                  <option value="Technical">Technical</option>
-                  <option value="Soft">Soft Skill</option>
-                  <option value="Domain">Business/Domain</option>
-                </select>
-              </div>
+              <Select
+                id="skill-category"
+                label="Category"
+                value={newSkillCategory}
+                onChange={(e) => setNewSkillCategory(e.target.value)}
+                placeholder={null}
+                options={[
+                  { value: 'Technical', label: 'Technical' },
+                  { value: 'Soft', label: 'Soft Skill' },
+                  { value: 'Domain', label: 'Business/Domain' }
+                ]}
+              />
 
-              <div className="flex flex-col gap-1.5">
-                <label className="text-label-md font-semibold text-on-surface-variant">Proficiency Level</label>
-                <select
-                  value={newSkillLevel}
-                  onChange={(e) => setNewSkillLevel(e.target.value)}
-                  className="flex h-10 w-full rounded-lg border bg-surface-container-low px-3.5 py-2 text-body-md text-on-surface border-outline-variant/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary outline-none"
-                >
-                  <option value="Beginner">Beginner</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Expert">Expert</option>
-                </select>
-              </div>
+              <Select
+                id="skill-proficiency"
+                label="Proficiency Level"
+                value={newSkillLevel}
+                onChange={(e) => setNewSkillLevel(e.target.value)}
+                placeholder={null}
+                options={[
+                  { value: 'Beginner', label: 'Beginner' },
+                  { value: 'Intermediate', label: 'Intermediate' },
+                  { value: 'Expert', label: 'Expert' }
+                ]}
+              />
 
               <Button type="submit" fullWidth icon={Plus} className="pt-2">
                 Add to Profile

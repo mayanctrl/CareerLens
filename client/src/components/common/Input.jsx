@@ -22,12 +22,14 @@ const Input = React.forwardRef(({
       <div className="relative">
         {Icon && (
           <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-            <Icon className="h-4.5 w-4.5 text-on-surface-variant/70" />
+            <Icon className="h-4.5 w-4.5 text-on-surface-variant/70" aria-hidden="true" />
           </div>
         )}
         <input
           id={generatedId}
           ref={ref}
+          aria-invalid={error ? "true" : undefined}
+          aria-describedby={error ? `${generatedId}-error` : undefined}
           className={`
             flex h-10 w-full rounded-lg border bg-surface-container-low px-3.5 py-2 text-body-md text-on-surface 
             placeholder:text-on-surface-variant/50 
@@ -42,7 +44,7 @@ const Input = React.forwardRef(({
         />
       </div>
       {error && (
-        <span className="text-label-sm text-error mt-0.5">{error}</span>
+        <span id={`${generatedId}-error`} className="text-label-sm text-error mt-0.5">{error}</span>
       )}
     </div>
   );

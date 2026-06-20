@@ -70,17 +70,15 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const sidebarContent = (
     <aside
       className="h-full w-[280px] bg-surface-low border-r border-outline-variant/10 flex flex-col py-6"
-      role="navigation"
-      aria-label="Main navigation"
     >
       {/* Logo */}
       <div className="px-6 mb-10 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
-            <BrainCircuit className="w-5 h-5 text-on-primary-container" />
+            <BrainCircuit className="w-5 h-5 text-on-primary-container" aria-hidden="true" />
           </div>
           <div>
-            <h1 className="text-headline-md font-bold text-primary leading-tight">CareerLens</h1>
+            <div className="text-headline-md font-bold text-primary leading-tight">CareerLens</div>
             <p className="text-label-sm text-on-surface-variant">AI Career Agent</p>
           </div>
         </div>
@@ -89,12 +87,15 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           onClick={toggleSidebar}
           aria-label="Close sidebar"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-0.5 px-2 custom-scrollbar overflow-y-auto">
+      <nav 
+        className="flex-1 space-y-0.5 px-2 custom-scrollbar overflow-y-auto"
+        aria-label="Main Navigation"
+      >
         {navItems.map((item) => (
           <NavLink
             key={item.path}
@@ -102,7 +103,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             onClick={() => window.innerWidth < 1024 && toggleSidebar()}
             className={navLinkClasses(item.path)}
           >
-            <item.icon className="w-5 h-5 shrink-0" />
+            <item.icon className="w-5 h-5 shrink-0" aria-hidden="true" />
             <span>{item.name}</span>
           </NavLink>
         ))}
@@ -125,7 +126,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             onClick={() => window.innerWidth < 1024 && toggleSidebar()}
             className={navLinkClasses('/settings')}
           >
-            <Settings className="w-5 h-5 shrink-0" />
+            <Settings className="w-5 h-5 shrink-0" aria-hidden="true" />
             <span>Settings</span>
           </NavLink>
           <NavLink
@@ -133,14 +134,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             onClick={() => window.innerWidth < 1024 && toggleSidebar()}
             className="flex items-center gap-3 px-4 py-2 text-label-sm text-on-surface-variant hover:text-on-surface transition-colors border-l-2 border-transparent"
           >
-            <HelpCircle className="w-5 h-5 shrink-0" />
+            <HelpCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
             <span>Support</span>
           </NavLink>
           <button
             onClick={handleSignOut}
             className="w-full flex items-center gap-3 px-4 py-2 text-label-sm text-on-surface-variant hover:text-error transition-colors border-l-2 border-transparent"
           >
-            <LogOut className="w-5 h-5 shrink-0" />
+            <LogOut className="w-5 h-5 shrink-0" aria-hidden="true" />
             <span>Sign Out</span>
           </button>
         </div>

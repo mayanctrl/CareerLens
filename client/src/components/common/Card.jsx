@@ -16,7 +16,7 @@ const Card = React.forwardRef(({
     : 'bg-surface-container shadow-md';
     
   const hoverStyles = hoverEffect 
-    ? 'hover:border-primary/30 hover:shadow-glow-teal hover:-translate-y-0.5' 
+    ? 'hover:border-primary/35 hover:shadow-md' 
     : '';
 
   const accentStyles = {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { 
   BrainCircuit, 
   Target, 
@@ -18,9 +19,30 @@ import Badge from '../../components/common/Badge';
 import ProgressRing from '../../components/charts/ProgressRing';
 import Skeleton from '../../components/common/Skeleton';
 import api from '../../lib/api';
+import SEO from '../../components/common/SEO';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://careerlens.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Dashboard",
+      "item": "https://careerlens.ai/dashboard"
+    }
+  ]
+};
 
 const DashboardPage = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   
@@ -103,6 +125,7 @@ const DashboardPage = () => {
 
   return (
     <div className="space-y-8 pb-12 animate-fade-in font-body">
+      <SEO title="Dashboard" description="Your AI career guidance dashboard. Track readiness scores, skill gaps, and explore recommendations." schema={breadcrumbSchema} />
       {/* Welcome Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
@@ -114,8 +137,8 @@ const DashboardPage = () => {
           </p>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary" icon={Target} onClick={() => window.location.href='/assessment'}>Retake Assessment</Button>
-          <Button icon={TrendingUp} onClick={() => window.location.href='/skills'}>Analyze Skills</Button>
+          <Button variant="secondary" icon={Target} onClick={() => navigate('/assessment')}>Retake Assessment</Button>
+          <Button icon={TrendingUp} onClick={() => navigate('/skills')}>Analyze Skills</Button>
         </div>
       </div>
 
@@ -177,31 +200,37 @@ const DashboardPage = () => {
             {/* Current */}
             <div className="bg-surface-low/30 border border-outline-variant/10 rounded-xl p-4 flex flex-col">
               <h3 className="text-label-sm font-bold text-primary uppercase tracking-wider mb-3">Current Skills</h3>
-              <div className="flex flex-wrap gap-1.5 content-start flex-1">
+              <ul className="flex flex-wrap gap-1.5 content-start flex-1">
                 {dashboardData?.skills?.current.map((skill) => (
-                  <Badge key={skill} variant="primary" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                  <li key={skill}>
+                    <Badge variant="primary" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
             
             {/* Missing */}
             <div className="bg-surface-low/30 border border-outline-variant/10 rounded-xl p-4 flex flex-col">
               <h3 className="text-label-sm font-bold text-tertiary uppercase tracking-wider mb-3">Missing Gaps</h3>
-              <div className="flex flex-wrap gap-1.5 content-start flex-1">
+              <ul className="flex flex-wrap gap-1.5 content-start flex-1">
                 {dashboardData?.skills?.missing.map((skill) => (
-                  <Badge key={skill} variant="error" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                  <li key={skill}>
+                    <Badge variant="error" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
             {/* Priority */}
             <div className="bg-surface-low/30 border border-outline-variant/10 rounded-xl p-4 flex flex-col">
               <h3 className="text-label-sm font-bold text-secondary uppercase tracking-wider mb-3">Priority Gaps</h3>
-              <div className="flex flex-wrap gap-1.5 content-start flex-1">
+              <ul className="flex flex-wrap gap-1.5 content-start flex-1">
                 {dashboardData?.skills?.priority.map((skill) => (
-                  <Badge key={skill} variant="warning" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                  <li key={skill}>
+                    <Badge variant="warning" className="py-0.5 px-2 text-[11px] font-semibold">{skill}</Badge>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </Card>
@@ -210,62 +239,66 @@ const DashboardPage = () => {
       {/* AI Career Insights Row */}
       <div className="space-y-4">
         <h2 className="text-headline-md font-bold text-on-surface flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-primary shrink-0 animate-pulse" />
+          <Sparkles className="w-5 h-5 text-primary shrink-0 animate-pulse" aria-hidden="true" />
           AI Career Insights
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {dashboardData?.insights.map((insight, idx) => (
-            <Card key={idx} hoverEffect className="relative overflow-hidden" glass>
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-label-sm font-semibold text-on-surface-variant mb-1">{insight.title}</p>
-                  <h3 className="text-body-lg font-bold text-on-surface mb-2">{insight.value}</h3>
-                  <p className="text-label-sm text-on-surface-variant/80">{insight.desc}</p>
+            <li key={idx}>
+              <Card hoverEffect className="relative overflow-hidden" glass>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-label-sm font-semibold text-on-surface-variant mb-1">{insight.title}</p>
+                    <h3 className="text-body-lg font-bold text-on-surface mb-2">{insight.value}</h3>
+                    <p className="text-label-sm text-on-surface-variant/80">{insight.desc}</p>
+                  </div>
+                  <div className={`w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center border border-outline-variant/10 ${insight.color}`}>
+                    <insight.icon className="w-5 h-5" aria-hidden="true" />
+                  </div>
                 </div>
-                <div className={`w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center border border-outline-variant/10 ${insight.color}`}>
-                  <insight.icon className="w-5 h-5" />
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
       {/* Curated Opportunities */}
       <div className="space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-headline-md font-bold text-on-surface flex items-center gap-2">
-            <Briefcase className="w-5 h-5 text-primary shrink-0" />
+            <Briefcase className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
             Curated Career Opportunities
           </h2>
-          <Button variant="ghost" size="sm" onClick={() => window.location.href='/recommendations'}>View All</Button>
+          <Button variant="ghost" size="sm" onClick={() => navigate('/recommendations')}>View All</Button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {dashboardData?.opportunities.map((opp, idx) => (
-            <Card key={idx} hoverEffect accentBar={opp.accent} className="group cursor-pointer flex flex-col justify-between h-[210px]" glass>
-              <div>
-                <div className="flex justify-between items-start mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant/10 text-on-surface font-bold text-headline-sm">
-                    {opp.logo}
+            <li key={idx}>
+              <Card hoverEffect accentBar={opp.accent} className="group cursor-pointer flex flex-col justify-between h-[210px]" glass>
+                <div>
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant/10 text-on-surface font-bold text-headline-sm">
+                      {opp.logo}
+                    </div>
+                    <Badge variant={opp.match >= 90 ? 'success' : 'primary'}>{opp.match}% Match</Badge>
                   </div>
-                  <Badge variant={opp.match >= 90 ? 'success' : 'primary'}>{opp.match}% Match</Badge>
+                  <h3 className="text-body-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-1">{opp.role}</h3>
+                  <p className="text-label-sm text-on-surface-variant font-semibold mt-0.5">{opp.company} • {opp.location}</p>
                 </div>
-                <h3 className="text-body-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-1">{opp.role}</h3>
-                <p className="text-label-sm text-on-surface-variant font-semibold mt-0.5">{opp.company} • {opp.location}</p>
-              </div>
-              
-              <div className="mt-4 pt-3 border-t border-outline-variant/10 flex items-center justify-between">
-                <span className="text-label-sm text-on-surface-variant/95 font-semibold">{opp.salary}</span>
-                <div className="text-label-sm font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Details
-                  <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+                
+                <div className="mt-4 pt-3 border-t border-outline-variant/10 flex items-center justify-between">
+                  <span className="text-label-sm text-on-surface-variant/95 font-semibold">{opp.salary}</span>
+                  <div className="text-label-sm font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Details
+                    <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

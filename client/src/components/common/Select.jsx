@@ -24,6 +24,8 @@ const Select = React.forwardRef(({
         <select
           id={generatedId}
           ref={ref}
+          aria-invalid={error ? "true" : undefined}
+          aria-describedby={error ? `${generatedId}-error` : undefined}
           className={`
             flex h-10 w-full rounded-lg border bg-surface-container-low px-3.5 py-2 text-body-md text-on-surface 
             appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary
@@ -42,11 +44,11 @@ const Select = React.forwardRef(({
           ))}
         </select>
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-on-surface-variant/70">
-          <ChevronDown className="h-4 w-4" />
+          <ChevronDown className="h-4 w-4" aria-hidden="true" />
         </div>
       </div>
       {error && (
-        <span className="text-label-sm text-error mt-0.5">{error}</span>
+        <span id={`${generatedId}-error`} className="text-label-sm text-error mt-0.5">{error}</span>
       )}
     </div>
   );

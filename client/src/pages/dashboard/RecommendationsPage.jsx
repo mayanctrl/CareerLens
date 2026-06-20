@@ -1,5 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Compass, Briefcase, Star, ArrowRight, DollarSign, TrendingUp } from 'lucide-react';
+import SEO from '../../components/common/SEO';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://careerlens.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Dashboard",
+      "item": "https://careerlens.ai/dashboard"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Recommendations",
+      "item": "https://careerlens.ai/recommendations"
+    }
+  ]
+};
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import Badge from '../../components/common/Badge';
@@ -37,6 +64,7 @@ const DEFAULT_RECOMMENDATIONS = [
 ];
 
 const RecommendationsPage = () => {
+  const navigate = useNavigate();
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -65,7 +93,7 @@ const RecommendationsPage = () => {
   const handleSelectPath = () => {
     showToast.success('Path selected! Building your week-by-week learning roadmap...');
     setTimeout(() => {
-      window.location.href = '/roadmap';
+      navigate('/roadmap');
     }, 1000);
   };
 
@@ -76,12 +104,13 @@ const RecommendationsPage = () => {
   if (recommendations.length === 0) {
     return (
       <div className="max-w-2xl mx-auto py-12">
+        <SEO title="Career Recommendations" description="Discover your AI career recommendations. Review matches based on your interest, personality, and technical aptitude." schema={breadcrumbSchema} />
         <EmptyState
           icon={Compass}
           title="No Recommendations Yet"
           description="Complete your career assessment to get personalized AI-driven career path recommendations."
           actionLabel="Take Assessment"
-          onAction={() => window.location.href = '/assessment'}
+          onAction={() => navigate('/assessment')}
         />
       </div>
     );
@@ -92,6 +121,7 @@ const RecommendationsPage = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-12 animate-fade-in font-body">
+      <SEO title="Career Recommendations" description="Review your AI-generated career path matches, salaries, growth projections, and compatibility stats." schema={breadcrumbSchema} />
       <div>
         <h1 className="text-headline-lg font-bold text-on-surface mb-2">
           AI Career Recommendations
@@ -113,7 +143,7 @@ const RecommendationsPage = () => {
           
           <div className="grid md:grid-cols-3 gap-8 p-8">
             <div className="col-span-1 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-outline-variant/15 pb-6 md:pb-0 md:pr-8">
-              <ProgressRing progress={topMatch.match_percentage} size={150} strokeWidth={11} color="#55e0d2">
+              <ProgressRing progress={topMatch.match_percentage} size={150} strokeWidth={11} color="#14b8a6">
                 <div className="flex flex-col items-center">
                   <span className="text-display-lg font-bold text-on-surface font-headline leading-none">{topMatch.match_percentage}%</span>
                   <span className="text-label-sm text-primary font-semibold mt-1">Match Score</span>
@@ -131,7 +161,7 @@ const RecommendationsPage = () => {
               
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-3 bg-surface-low border border-outline-variant/15 px-4 py-2.5 rounded-xl">
-                  <DollarSign className="w-5 h-5 text-success shrink-0" />
+                  <DollarSign className="w-5 h-5 text-success shrink-0" aria-hidden="true" />
                   <div>
                     <div className="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Salary Range</div>
                     <div className="text-label-md font-bold text-on-surface">{topMatch.salary_range}</div>
@@ -139,7 +169,7 @@ const RecommendationsPage = () => {
                 </div>
                 
                 <div className="flex items-center gap-3 bg-surface-low border border-outline-variant/15 px-4 py-2.5 rounded-xl">
-                  <TrendingUp className="w-5 h-5 text-secondary shrink-0" />
+                  <TrendingUp className="w-5 h-5 text-secondary shrink-0" aria-hidden="true" />
                   <div>
                     <div className="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Growth Rate</div>
                     <div className="text-label-md font-bold text-on-surface">{topMatch.growth_rate}</div>
@@ -149,7 +179,7 @@ const RecommendationsPage = () => {
               
               <div className="pt-2">
                 <Button size="lg" className="shadow-glow-teal group" onClick={handleSelectPath}>
-                  Select This Path & Create Roadmap <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                  Select This Path & Create Roadmap <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
                 </Button>
               </div>
             </div>
@@ -160,32 +190,34 @@ const RecommendationsPage = () => {
       {/* Other Matches */}
       <div className="space-y-4">
         <h3 className="text-headline-sm font-bold text-on-surface">Other Strong Matches</h3>
-        <div className="grid md:grid-cols-2 gap-6">
+        <ul className="grid md:grid-cols-2 gap-6">
           {otherMatches.map((job) => (
-            <Card key={job.recommendation_id} hoverEffect className="flex flex-col h-[220px]" glass>
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="text-headline-sm font-bold text-on-surface line-clamp-1">{job.career_name}</h4>
-                  <span className="text-label-sm font-semibold text-on-surface-variant">Growth: {job.growth_rate}</span>
+            <li key={job.recommendation_id}>
+              <Card hoverEffect className="flex flex-col h-[220px]" glass>
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 className="text-headline-sm font-bold text-on-surface line-clamp-1">{job.career_name}</h4>
+                    <span className="text-label-sm font-semibold text-on-surface-variant">Growth: {job.growth_rate}</span>
+                  </div>
+                  <div className="relative w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg border border-outline-variant/10">
+                    <span className="text-label-sm font-bold text-primary">{job.match_percentage}%</span>
+                  </div>
                 </div>
-                <div className="relative w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg border border-outline-variant/10">
-                  <span className="text-label-sm font-bold text-primary">{job.match_percentage}%</span>
+                
+                <p className="text-body-md text-on-surface-variant mb-4 flex-1 line-clamp-2 leading-relaxed">
+                  {job.description}
+                </p>
+                
+                <div className="mt-auto border-t border-outline-variant/10 pt-3 flex justify-between items-center">
+                  <div className="text-label-sm text-on-surface-variant/90 font-semibold">{job.salary_range}</div>
+                  <Button variant="ghost" size="sm" className="text-primary font-bold pr-0 flex items-center gap-1" onClick={handleSelectPath}>
+                    Select Path <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                  </Button>
                 </div>
-              </div>
-              
-              <p className="text-body-md text-on-surface-variant mb-4 flex-1 line-clamp-2 leading-relaxed">
-                {job.description}
-              </p>
-              
-              <div className="mt-auto border-t border-outline-variant/10 pt-3 flex justify-between items-center">
-                <div className="text-label-sm text-on-surface-variant/90 font-semibold">{job.salary_range}</div>
-                <Button variant="ghost" size="sm" className="text-primary font-bold pr-0 flex items-center gap-1" onClick={handleSelectPath}>
-                  Select Path <ArrowRight className="w-3.5 h-3.5 shrink-0" />
-                </Button>
-              </div>
-            </Card>
+              </Card>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

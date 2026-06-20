@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, LogIn, BrainCircuit } from 'lucide-react';
+import SEO from '../../components/common/SEO';
 import { supabase } from '../../lib/supabase';
 import { showToast } from '../../components/common/Toast';
 import Button from '../../components/common/Button';
@@ -42,6 +43,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      <SEO title="Sign In" description="Sign in to your CareerLens account to track your skill gaps, analyze your resume, and follow your AI career roadmap." />
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
 
@@ -49,7 +51,7 @@ const LoginPage = () => {
         <div className="flex justify-center mb-6">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center group-hover:shadow-glow-teal transition-shadow border border-outline-variant/10">
-              <BrainCircuit className="w-6 h-6 text-on-primary-container" />
+              <BrainCircuit className="w-6 h-6 text-on-primary-container" aria-hidden="true" />
             </div>
             <div>
               <span className="text-headline-md font-bold text-primary tracking-tight">
